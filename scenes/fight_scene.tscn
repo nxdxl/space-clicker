@@ -1,0 +1,99 @@
+[gd_scene load_steps=11 format=3 uid="uid://c5ur72d1dpmre"]
+
+[ext_resource type="Script" uid="uid://bcglkwopaiaj1" path="res://scripts/fight_handler.gd" id="1_7aqs0"]
+[ext_resource type="StyleBox" uid="uid://l7ml62qm5sdc" path="res://tres/presets/button_style.tres" id="1_bu534"]
+[ext_resource type="Texture2D" uid="uid://df7awq87w0soa" path="res://img/backgrounds/main_background.png" id="2_bu534"]
+[ext_resource type="Script" uid="uid://oj172dymblsc" path="res://scripts/button_animation.gd" id="2_reipo"]
+[ext_resource type="Texture2D" uid="uid://cty5ov15u0a7g" path="res://img/ui/Frame 49.png" id="3_eobh7"]
+[ext_resource type="Texture2D" uid="uid://bg88se71rrxqx" path="res://img/ui/Frame 50(3).png" id="4_6ls7e"]
+[ext_resource type="PackedScene" uid="uid://cg4scer0ftj64" path="res://scenes/info_pop_up.tscn" id="7_reipo"]
+[ext_resource type="AudioStream" uid="uid://cncxf6osbf804" path="res://audio/music/fight.ogg" id="8_eobh7"]
+[ext_resource type="AudioStream" uid="uid://cacb10iuepm6y" path="res://audio/music/ruru_bossmusic.ogg" id="9_6ls7e"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_reipo"]
+texture = ExtResource("2_bu534")
+modulate_color = Color(0.396889, 0.396889, 0.396889, 1)
+
+[node name="FightScene" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_7aqs0")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_reipo")
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 100.0
+offset_top = 100.0
+offset_right = 254.0
+offset_bottom = 165.0
+size_flags_horizontal = 0
+theme_override_constants/outline_size = 20
+theme_override_font_sizes/font_size = 40
+theme_override_styles/focus = ExtResource("1_bu534")
+theme_override_styles/hover = ExtResource("1_bu534")
+theme_override_styles/pressed = ExtResource("1_bu534")
+theme_override_styles/normal = ExtResource("1_bu534")
+text = "  FLEE  "
+script = ExtResource("2_reipo")
+
+[node name="HealthBar" type="TextureProgressBar" parent="."]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(500, 64)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -250.0
+offset_top = -32.0
+offset_right = 250.0
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+max_value = 0.0
+nine_patch_stretch = true
+stretch_margin_left = 32
+stretch_margin_top = 5
+stretch_margin_right = 32
+stretch_margin_bottom = 5
+texture_under = ExtResource("3_eobh7")
+texture_progress = ExtResource("4_6ls7e")
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="InfoPopUp" parent="." instance=ExtResource("7_reipo")]
+layout_mode = 1
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_eobh7")
+volume_db = -6.0
+
+[node name="RuruBossBGM" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("9_6ls7e")
+volume_db = -6.0
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

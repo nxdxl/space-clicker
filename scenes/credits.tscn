@@ -1,0 +1,521 @@
+[gd_scene load_steps=14 format=3 uid="uid://cdrh1p1a7r1t6"]
+
+[ext_resource type="Script" uid="uid://cphmrpfb4j4kk" path="res://scripts/credits.gd" id="1_2fbfq"]
+[ext_resource type="Texture2D" uid="uid://cnh77km8pq2jv" path="res://img/ui/popup/pop_up_background.png" id="2_8gwij"]
+[ext_resource type="Texture2D" uid="uid://chnjefcoc7ml1" path="res://img/ui/bridge/info_icon.png" id="3_mah5v"]
+[ext_resource type="Script" uid="uid://oj172dymblsc" path="res://scripts/button_animation.gd" id="4_kyhnv"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2fdt4"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2fdt4"]
+bg_color = Color(0.490196, 0.533333, 0.976471, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+shadow_color = Color(0, 0, 0, 0.313726)
+shadow_size = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8erbt"]
+bg_color = Color(0.491466, 0.532646, 0.977889, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+shadow_color = Color(0, 0, 0, 0.313726)
+shadow_size = 5
+
+[sub_resource type="Animation" id="Animation_qcw0a"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = false
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_8erbt"]
+resource_name = "pop_up_animation"
+length = 0.1667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.0333333, 0.166667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_p8fdt"]
+_data = {
+&"RESET": SubResource("Animation_qcw0a"),
+&"pop_up_animation": SubResource("Animation_8erbt")
+}
+
+[sub_resource type="Animation" id="Animation_fhso0"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_p8fdt"]
+resource_name = "pop_down_animation"
+length = 0.1667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.166667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fhso0"]
+_data = {
+&"RESET": SubResource("Animation_fhso0"),
+&"pop_down_animation": SubResource("Animation_p8fdt")
+}
+
+[node name="Credits" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(960, 540)
+script = ExtResource("1_2fbfq")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 200
+theme_override_constants/margin_top = 100
+theme_override_constants/margin_right = 200
+theme_override_constants/margin_bottom = 100
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer"]
+layout_mode = 2
+texture = ExtResource("2_8gwij")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 90
+theme_override_constants/margin_top = 90
+theme_override_constants/margin_right = 90
+theme_override_constants/margin_bottom = 90
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_2fdt4")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/MarginContainer/VBoxContainer/PanelContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/MarginContainer/VBoxContainer/PanelContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="PopUpIcon" type="TextureRect" parent="MarginContainer/MarginContainer/VBoxContainer/PanelContainer/HBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+texture = ExtResource("3_mah5v")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="PopUpTitle" type="RichTextLabel" parent="MarginContainer/MarginContainer/VBoxContainer/PanelContainer/HBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+clip_contents = false
+custom_minimum_size = Vector2(375, 0)
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 20
+theme_override_constants/shadow_outline_size = 20
+theme_override_font_sizes/bold_italics_font_size = 10
+theme_override_font_sizes/italics_font_size = 10
+theme_override_font_sizes/mono_font_size = 10
+theme_override_font_sizes/normal_font_size = 60
+theme_override_font_sizes/bold_font_size = 10
+text = "CREDITS"
+fit_content = true
+autowrap_mode = 0
+vertical_alignment = 2
+
+[node name="Control" type="Control" parent="MarginContainer/MarginContainer/VBoxContainer/PanelContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Button" type="Button" parent="MarginContainer/MarginContainer/VBoxContainer/PanelContainer/HBoxContainer/Control"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(150, 75)
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -41.5
+offset_bottom = 41.5
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 20
+theme_override_font_sizes/font_size = 35
+theme_override_styles/hover = SubResource("StyleBoxFlat_2fdt4")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_2fdt4")
+theme_override_styles/normal = SubResource("StyleBoxFlat_8erbt")
+text = "CLOSE"
+script = ExtResource("4_kyhnv")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/MarginContainer/VBoxContainer"]
+z_index = 10
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="CreditsContainer" type="VBoxContainer" parent="MarginContainer/MarginContainer/VBoxContainer/ScrollContainer"]
+unique_name_in_owner = true
+clip_contents = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 10
+
+[node name="HBoxContainer16" type="HBoxContainer" parent="MarginContainer/MarginContainer/VBoxContainer/ScrollContainer/CreditsContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/MarginContainer/VBoxContainer/ScrollContainer/CreditsContainer/HBoxContainer16"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 30
+text = "Incredible Furo Artwork: My Absolute Goat natt0 "
+
+[node name="LinkButton" type="LinkButton" parent="MarginContainer/MarginContainer/VBoxContainer/ScrollContainer/CreditsContainer/HBoxContainer16"]
+layout_mode = 2
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 30
+text = "Instagram"
+uri = "https://www.instagram.com/coconatt0"
+
+[node name="HBoxContainer20" type="HBoxContainer" parent="MarginContainer/MarginContainer/VBoxContainer/ScrollContainer/CreditsContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/MarginContainer/VBoxContainer/ScrollContainer/CreditsContainer/HBoxContainer20"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 30
+text = "v Cute Ruru Artwork: zeno "
+
+[node name="LinkButton" type="LinkButton" parent="MarginContainer/MarginContainer/VBoxContainer/ScrollContainer/CreditsContainer/HBoxContainer20"]
+layout_mode = 2
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 30
+text = "Twitter"
+uri = "https://x.com/zenoO0018"
+
+[node name="HBoxContainer13" type="HBoxContainer" parent="MarginContainer/MarginContainer/VBoxContainer/ScrollContainer/CreditsContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/MarginContainer/VBoxContainer/ScrollContainer/CreditsContainer/HBoxContainer13"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 30
+text = "Ruru voice acting: The PEAK VA Hoshiyuzuki Ruru "
+
+[node name="LinkButton" type="LinkButton" parent="MarginContainer/MarginContainer/VBoxContainer/ScrollContainer/CreditsContainer/HBoxContainer13"]
+layout_mode = 2
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 30
+text = "Twitch"
+uri = "https://www.twitch.tv/ruruchiix"
+
+[node name="HBoxContainer12" type="HBoxContainer" parent="MarginContainer/MarginContainer/VBoxContainer/ScrollContainer/CreditsContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/MarginContainer/VBoxContainer/ScrollContainer/CreditsContainer/HBoxContainer12"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 30
+text = "Rubber Duck: Ruru (A massive help while coding, acting as a wall to talk to)"
+
+[node name="HBoxContainer14" type="HBoxContainer" parent="MarginContainer/MarginContainer/VBoxContainer/ScrollContainer/CreditsContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/MarginContainer/VBoxContainer/ScrollContainer/CreditsContainer/HBoxContainer14"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 30
+text = "Script and Translation: Styx (Me, Myself, and I) "
+
+[node name="LinkButton" type="LinkButton" parent="MarginContainer/MarginContainer/VBoxContainer/ScrollContainer/CreditsContainer/HBoxContainer14"]
+layout_mode = 2
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 30
+text = "Instagram"
+uri = "https://www.instagram.com/styx_va"
+
+[node name="HBoxContainer15" type="HBoxContainer" parent="MarginContainer/MarginContainer/VBoxContainer/ScrollContainer/CreditsContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/MarginContainer/VBoxContainer/ScrollContainer/CreditsContainer/HBoxContainer15"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 30
+text = "Proofreading: あお"
+
+[node name="HBoxContainer19" type="HBoxContainer" parent="MarginContainer/MarginContainer/VBoxContainer/ScrollContainer/CreditsContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/MarginContainer/VBoxContainer/ScrollContainer/CreditsContainer/HBoxContainer19"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 30
+text = "Dialog System: "
+
+[node name="LinkButton" type="LinkButton" parent="MarginContainer/MarginContainer/VBoxContainer/ScrollContainer/CreditsContainer/HBoxContainer19"]
+layout_mode = 2
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 30
+text = "LINK"
+uri = "https://github.com/dialogic-godot/dialogic"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/MarginContainer/VBoxContainer/ScrollContainer/CreditsContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/MarginContainer/VBoxContainer/ScrollContainer/CreditsContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 30
+text = "Planet Generator by Deep-Fold: "
+
+[node name="LinkButton" type="LinkButton" parent="MarginContainer/MarginContainer/VBoxContainer/ScrollContainer/CreditsContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 30
+text = "LINK"
+uri = "https://deep-fold.itch.io/pixel-planet-generator"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/MarginContainer/VBoxContainer/ScrollContainer/CreditsContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/MarginContainer/VBoxContainer/ScrollContainer/CreditsContainer/HBoxContainer2"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 30
+text = "Space BG Generator by Deep-Fold: "
+
+[node name="LinkButton" type="LinkButton" parent="MarginContainer/MarginContainer/VBoxContainer/ScrollContainer/CreditsContainer/HBoxContainer2"]
+layout_mode = 2
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 30
+text = "LINK"
+uri = "https://deep-fold.itch.io/space-background-generator"
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="MarginContainer/MarginContainer/VBoxContainer/ScrollContainer/CreditsContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/MarginContainer/VBoxContainer/ScrollContainer/CreditsContainer/HBoxContainer3"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 30
+text = "Space Station and Item Icons: AI Generated"
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="MarginContainer/MarginContainer/VBoxContainer/ScrollContainer/CreditsContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/MarginContainer/VBoxContainer/ScrollContainer/CreditsContainer/HBoxContainer4"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 30
+text = "Einkaufstasche: "
+
+[node name="LinkButton" type="LinkButton" parent="MarginContainer/MarginContainer/VBoxContainer/ScrollContainer/CreditsContainer/HBoxContainer4"]
+layout_mode = 2
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 30
+text = "LINK"
+uri = "https://icons8.com/icon/3686/shopping-bag"
+
+[node name="HBoxContainer5" type="HBoxContainer" parent="MarginContainer/MarginContainer/VBoxContainer/ScrollContainer/CreditsContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/MarginContainer/VBoxContainer/ScrollContainer/CreditsContainer/HBoxContainer5"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 30
+text = "Schlafen: "
+
+[node name="LinkButton" type="LinkButton" parent="MarginContainer/MarginContainer/VBoxContainer/ScrollContainer/CreditsContainer/HBoxContainer5"]
+layout_mode = 2
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 30
+text = "LINK"
+uri = "https://icons8.com/icon/6374/sleep"
+
+[node name="HBoxContainer17" type="HBoxContainer" parent="MarginContainer/MarginContainer/VBoxContainer/ScrollContainer/CreditsContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/MarginContainer/VBoxContainer/ScrollContainer/CreditsContainer/HBoxContainer17"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 30
+text = "Hammer und Amboss: "
+
+[node name="LinkButton" type="LinkButton" parent="MarginContainer/MarginContainer/VBoxContainer/ScrollContainer/CreditsContainer/HBoxContainer17"]
+layout_mode = 2
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 30
+text = "LINK"
+uri = "https://icons8.com/icon/122925/hammer-and-anvil"
+
+[node name="HBoxContainer18" type="HBoxContainer" parent="MarginContainer/MarginContainer/VBoxContainer/ScrollContainer/CreditsContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/MarginContainer/VBoxContainer/ScrollContainer/CreditsContainer/HBoxContainer18"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 30
+text = "Kompass: "
+
+[node name="LinkButton" type="LinkButton" parent="MarginContainer/MarginContainer/VBoxContainer/ScrollContainer/CreditsContainer/HBoxContainer18"]
+layout_mode = 2
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 30
+text = "LINK"
+uri = "https://icons8.com/icon/9672/compass"
+
+[node name="HBoxContainer6" type="HBoxContainer" parent="MarginContainer/MarginContainer/VBoxContainer/ScrollContainer/CreditsContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/MarginContainer/VBoxContainer/ScrollContainer/CreditsContainer/HBoxContainer6"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 30
+text = "Anmelden abgerundet: "
+
+[node name="LinkButton" type="LinkButton" parent="MarginContainer/MarginContainer/VBoxContainer/ScrollContainer/CreditsContainer/HBoxContainer6"]
+layout_mode = 2
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 30
+text = "LINK"
+uri = "https://icons8.com/icon/26218/login"
+
+[node name="HBoxContainer7" type="HBoxContainer" parent="MarginContainer/MarginContainer/VBoxContainer/ScrollContainer/CreditsContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/MarginContainer/VBoxContainer/ScrollContainer/CreditsContainer/HBoxContainer7"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 30
+text = "Ores: "
+
+[node name="LinkButton" type="LinkButton" parent="MarginContainer/MarginContainer/VBoxContainer/ScrollContainer/CreditsContainer/HBoxContainer7"]
+layout_mode = 2
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 30
+text = "LINK"
+uri = "https://kdrn.itch.io/free-ores-and-minerals-minipack-24"
+
+[node name="HBoxContainer8" type="HBoxContainer" parent="MarginContainer/MarginContainer/VBoxContainer/ScrollContainer/CreditsContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/MarginContainer/VBoxContainer/ScrollContainer/CreditsContainer/HBoxContainer8"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 30
+text = "Ice Cream (without the halo effect): "
+
+[node name="LinkButton" type="LinkButton" parent="MarginContainer/MarginContainer/VBoxContainer/ScrollContainer/CreditsContainer/HBoxContainer8"]
+layout_mode = 2
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 30
+text = "LINK"
+uri = "https://dragonember.itch.io/icecream"
+
+[node name="HBoxContainer9" type="HBoxContainer" parent="MarginContainer/MarginContainer/VBoxContainer/ScrollContainer/CreditsContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/MarginContainer/VBoxContainer/ScrollContainer/CreditsContainer/HBoxContainer9"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 30
+text = "Enemy-artwork: RPG Maker MV Battle Girl characters Pack 1"
+
+[node name="HBoxContainer10" type="HBoxContainer" parent="MarginContainer/MarginContainer/VBoxContainer/ScrollContainer/CreditsContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/MarginContainer/VBoxContainer/ScrollContainer/CreditsContainer/HBoxContainer10"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 30
+text = "Music and Sound: RPG Maker MV (Yes, I somehow own them all)"
+
+[node name="HBoxContainer11" type="HBoxContainer" parent="MarginContainer/MarginContainer/VBoxContainer/ScrollContainer/CreditsContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/MarginContainer/VBoxContainer/ScrollContainer/CreditsContainer/HBoxContainer11"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 30
+text = "Gold Coin: "
+
+[node name="LinkButton" type="LinkButton" parent="MarginContainer/MarginContainer/VBoxContainer/ScrollContainer/CreditsContainer/HBoxContainer11"]
+layout_mode = 2
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 30
+text = "LINK"
+uri = "https://jordon-games.itch.io/animated-gold-coin"
+
+[node name="PopUpAnimation" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_p8fdt")
+}
+
+[node name="PopDownAnimation" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_fhso0")
+}
+
+[connection signal="pressed" from="MarginContainer/MarginContainer/VBoxContainer/PanelContainer/HBoxContainer/Control/Button" to="." method="_on_button_pressed"]

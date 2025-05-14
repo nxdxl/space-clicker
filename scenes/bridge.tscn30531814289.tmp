@@ -1,0 +1,102 @@
+[gd_scene load_steps=5 format=3 uid="uid://6q857yu0gjq4"]
+
+[ext_resource type="Texture2D" uid="uid://df7awq87w0soa" path="res://img/backgrounds/MainBackground.png" id="1_im2sa"]
+[ext_resource type="Script" uid="uid://rl67bg0fu2qu" path="res://scripts/bridge_main.gd" id="1_vwxv3"]
+[ext_resource type="Texture2D" uid="uid://r2nk38pelbcc" path="res://img/backgrounds/SpaceStationBackground.png" id="2_1q54l"]
+[ext_resource type="Texture2D" uid="uid://dcpw8y6kuu1ld" path="res://img/planets/ice_cream_planet_image.png" id="4_yibb0"]
+
+[node name="Bridge" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_vwxv3")
+button_textures = Array[Texture2D]([ExtResource("4_yibb0"), ExtResource("4_yibb0"), ExtResource("4_yibb0"), ExtResource("4_yibb0"), ExtResource("4_yibb0")])
+target_scenes = Array[String](["", "", "", "", ""])
+
+[node name="BackgroundImage" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_im2sa")
+expand_mode = 3
+
+[node name="SpaceStationImage" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_1q54l")
+expand_mode = 5
+
+[node name="ButtonContainer" type="Control" parent="."]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 1
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 20.0
+offset_right = 500.0
+
+[node name="BridgeExitButton" type="TextureButton" parent="ButtonContainer"]
+visible = false
+layout_mode = 0
+offset_left = 187.421
+offset_top = 234.0
+offset_right = 387.421
+offset_bottom = 434.0
+rotation = 0.785398
+tooltip_text = "Exit the game"
+texture_normal = ExtResource("4_yibb0")
+
+[node name="BridgeNamazonButton" type="TextureButton" parent="ButtonContainer"]
+visible = false
+layout_mode = 0
+offset_left = 376.421
+offset_top = 91.9999
+offset_right = 576.421
+offset_bottom = 292.0
+rotation = 0.785398
+tooltip_text = "Shopping"
+texture_normal = ExtResource("4_yibb0")
+
+[node name="BridgeNaviButton" type="TextureButton" parent="ButtonContainer"]
+visible = false
+layout_mode = 0
+offset_left = 187.422
+offset_top = -72.0
+offset_right = 387.422
+offset_bottom = 128.0
+rotation = 0.785398
+tooltip_text = "Explore Planets"
+texture_normal = ExtResource("4_yibb0")
+
+[node name="BridgeSleepButton" type="TextureButton" parent="ButtonContainer"]
+visible = false
+layout_mode = 0
+offset_left = 294.0
+offset_top = -305.0
+offset_right = 494.0
+offset_bottom = -105.0
+rotation = 1.5708
+texture_normal = ExtResource("4_yibb0")
+
+[node name="BridgeWorkshopButton" type="TextureButton" parent="ButtonContainer"]
+visible = false
+layout_mode = 0
+offset_left = 472.0
+offset_top = -141.0
+offset_right = 672.0
+offset_bottom = 59.0
+rotation = 1.5708
+texture_normal = ExtResource("4_yibb0")
+
+[connection signal="pressed" from="ButtonContainer/BridgeExitButton" to="." method="_on_bridge_exit_button_pressed"]
+[connection signal="pressed" from="ButtonContainer/BridgeNamazonButton" to="." method="_on_bridge_namazon_button_pressed"]
+[connection signal="pressed" from="ButtonContainer/BridgeNaviButton" to="." method="_on_bridge_navi_button_pressed"]

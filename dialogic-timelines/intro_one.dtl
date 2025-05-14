@@ -1,0 +1,18 @@
+join furo center
+furo (annoyed): So you finally woke up. We have a mission to complete. How long do you intent to play dead.
+player: ...
+furo (default): What?
+player: Who... are you?
+furo (default): Oh come on. Did you hit your head too hard? Sigh... I'm Furo. I'm your guide for what it's worth.
+player: My guide?
+furo (annoyed): So you really don't remember huh... We're on a special mission given to us by the almighty galactic emperor and ruler of the known universe Mr. Orange himself. We're supposed to find Antimatter so that the great chosen one can conquer even the most remote parts of the universe, and extend his influence into the unknown universe as well.
+player: I was chosen for that?
+furo (angry): We. And I don't get it either. An idiot like you, with a genius like me..?
+player: Ey..
+furo (angry): Okay... Since you don't remember, let me show you around the bridge. You are currently aboard the holy empirial space station. This is the control room, also called "The Bridge". This will be our base of operations from now on.
+furo (annoyed): In order to find the much needed Antimatter, we need to explore the planets in our vicinity. We should be close already. We weren't given the best equipment though, unfortunately. (For plot reasons obviously)
+player: Plot reasons...?
+furo (default): That's why we should first explore planets closer to us and see if we can somehow manage to upgrade our equipment.
+player: You're just ignoring it??
+furo (default): Here. Click this button. It will open the Navi showing the planets in our surroundings.
+leave furo

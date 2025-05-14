@@ -1,0 +1,94 @@
+[gd_scene load_steps=10 format=3 uid="uid://wfb8pbt6i4r1"]
+
+[ext_resource type="Script" uid="uid://yf4jj8dvacyi" path="res://scripts/planet.gd" id="1_yy8ok"]
+[ext_resource type="StyleBox" uid="uid://l7ml62qm5sdc" path="res://tres/presets/button_style.tres" id="2_umkgb"]
+[ext_resource type="Texture2D" uid="uid://bdrhelfwwblc1" path="res://img/backgrounds/exotic_matter_galaxy_background.png" id="2_yy8ok"]
+[ext_resource type="PackedScene" uid="uid://j67sscb7foyg" path="res://scenes/ore_template.tscn" id="3_sh4mb"]
+[ext_resource type="Script" uid="uid://oj172dymblsc" path="res://scripts/button_animation.gd" id="4_4nlid"]
+[ext_resource type="Texture2D" uid="uid://cty5ov15u0a7g" path="res://img/ui/Frame 49.png" id="5_5ttdb"]
+[ext_resource type="Texture2D" uid="uid://bg88se71rrxqx" path="res://img/ui/Frame 50(3).png" id="6_0cafj"]
+[ext_resource type="Texture2D" uid="uid://dgg0jjxe3fxsm" path="res://tres/exotic_matter.tres" id="8_5ttdb"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_j1baq"]
+texture = ExtResource("2_yy8ok")
+modulate_color = Color(0.552956, 0.552956, 0.552956, 1)
+
+[node name="ExoticMatterGalaxy" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_yy8ok")
+ore_type = 2
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_j1baq")
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 2
+offset_left = 100.0
+offset_top = 100.0
+offset_right = 254.0
+offset_bottom = 165.0
+size_flags_horizontal = 0
+theme_override_constants/outline_size = 20
+theme_override_font_sizes/font_size = 40
+theme_override_styles/focus = ExtResource("2_umkgb")
+theme_override_styles/hover = ExtResource("2_umkgb")
+theme_override_styles/pressed = ExtResource("2_umkgb")
+theme_override_styles/normal = ExtResource("2_umkgb")
+text = "  BACK  "
+script = ExtResource("4_4nlid")
+
+[node name="HealthBar" type="TextureProgressBar" parent="."]
+custom_minimum_size = Vector2(500, 64)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -250.0
+offset_top = -32.0
+offset_right = 250.0
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+max_value = 0.0
+nine_patch_stretch = true
+stretch_margin_left = 32
+stretch_margin_top = 5
+stretch_margin_right = 32
+stretch_margin_bottom = 5
+texture_under = ExtResource("5_5ttdb")
+texture_progress = ExtResource("6_0cafj")
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="OreTemplate" parent="CenterContainer" instance=ExtResource("3_sh4mb")]
+ore_type = 2
+max_health = 2000
+ore_texture = ExtResource("8_5ttdb")
+price = 1000
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[connection signal="notify_healthbar" from="CenterContainer/OreTemplate" to="." method="_on_ore_template_notify_healthbar"]

@@ -1,0 +1,11 @@
+join furo (youre_dead) center
+furo: ...!
+furo (stars): I- i- ice-- cream...!
+player: ...
+furo (annoyed): It's not like I want it or anything!
+player: Right. Then let's go home, I don't think this is gonna help us with our ship anyway.
+furo (stars): But it also doesn't hurt, does it?
+update furo (angry)
+player: Heh.
+furo (angry): Mh!
+leave furo

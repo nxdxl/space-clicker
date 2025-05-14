@@ -1,0 +1,65 @@
+{
+"@path": "res://addons/dialogic/Resources/character.gd",
+"@subpath": NodePath(""),
+&"_translation_id": "",
+&"color": Color(1, 1, 1, 1),
+&"custom_info": {
+"sound_mood_default": "",
+"sound_moods": {},
+"style": "custom_style"
+},
+&"default_portrait": "default",
+&"description": "",
+&"display_name": "Furo",
+&"mirror": false,
+&"nicknames": [""],
+&"offset": Vector2(0, 0),
+&"portraits": {
+"angry": {
+"export_overrides": {
+"image": "\"res://img/characters/furo/furo_angry.png\""
+},
+"mirror": false,
+"offset": Vector2(0, 0),
+"scale": 1.0,
+"scene": ""
+},
+"annoyed": {
+"export_overrides": {
+"image": "\"res://img/characters/furo/furo_annoyed.png\""
+},
+"mirror": false,
+"offset": Vector2(0, 0),
+"scale": 1,
+"scene": ""
+},
+"default": {
+"export_overrides": {
+"image": "\"res://img/characters/furo/furo_normal.png\""
+},
+"mirror": false,
+"offset": Vector2(0, 0),
+"scale": 1,
+"scene": ""
+},
+"stars": {
+"export_overrides": {
+"image": "\"res://img/characters/furo/furo_stars.png\""
+},
+"mirror": false,
+"offset": Vector2(0, 0),
+"scale": 1,
+"scene": ""
+},
+"youre_dead": {
+"export_overrides": {
+"image": "\"res://img/characters/furo/furo_youre_dead.png\""
+},
+"mirror": false,
+"offset": Vector2(0, 0),
+"scale": 1,
+"scene": ""
+}
+},
+&"scale": 1.0
+}
