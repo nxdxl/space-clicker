@@ -41,7 +41,7 @@ func _kill_bgm() -> void:
 
 
 func handle_enemy_info() -> void:
-	_show_info("Click on the enemy until it dies. If you're too slow, it might destroy your satellite ship. (dying isn't implemented yet)")
+	InfoPopupManager.show_info("Click on the enemy until it dies. If you're too slow, it might destroy your satellite ship. (dying isn't implemented yet)")
 
 
 func _initiate_healthbar(health_bar_bar: TextureProgressBar):
@@ -91,39 +91,3 @@ func _on_button_pressed() -> void:
 func _handle_ruru_creation() -> void:
 	_initiate_healthbar(health_bar)
 	ruru_bgm.play()
-
-
-# *********************************************************** #
-# copying and pasting this into every script.... i am so over #
-# *********************************************************** #
-
-
-func _info_warning_open(mode: String, scene: Control, animation_player: AnimationPlayer, text: String) -> void:
-	# all these hacks... i hate reading my own code man, this is such an atrocity
-	scene._ready()
-	var warning_icon = preload("res://img/ui/popup/warning_icon_red.png")
-	var info_icon = preload("res://img/ui/popup/info_icon_yellow.png")
-	
-	if mode == "info":
-		scene.set_title("Info")
-		scene.set_icon(info_icon)
-		scene.set_text(text)
-	else:
-		scene.set_title("Warning")
-		scene.set_icon(warning_icon)
-		scene.set_text(text)
-	scene.visible = true
-	
-	animation_player.play("pop_up_animation")
-
-
-func _show_warning(text: String) -> void:
-	var warning_popup: Control = $InfoPopUp
-	var warning_animation_player: AnimationPlayer = $InfoPopUp/PopUpAnimation
-	_info_warning_open("warning", warning_popup, warning_animation_player, text)
-
-
-func _show_info(text: String) -> void:
-	var info_popup: Control = $InfoPopUp
-	var info_animation_player: AnimationPlayer = $InfoPopUp/PopUpAnimation
-	_info_warning_open("info", info_popup, info_animation_player, text)

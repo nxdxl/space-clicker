@@ -45,6 +45,6 @@ func _not_spoon_or_shield() -> bool:
 
 func _on_upgrade_button_pressed(item_data: ItemData) -> void:
 	Item.upgrade(item_data)
-	AudioPlayer.play_sound(AudioPlayer.Sound.Upgrade)
+	AudioPlayer.play_sound(AudioPlayer.Sound.UPGRADE)
 	emit_signal("item_upgraded")
 	emit_signal("refresh_workshop")
