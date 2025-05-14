@@ -68,16 +68,16 @@ func _enemy_dead() -> void:
 		Player.defeated_ruru = true
 		Dialogic.timeline_ended.connect(_ruru_timeline_defeated)
 		return
-		
-	SceneSwitcher.switch_scene(Globals.planet_scenes[target_planet])
+	
+	SceneSwitcher.switch_scene("res://scenes/planet_scene.tscn", target_planet)
 
 
 func _on_dialogic_ended() -> void:
-	SceneSwitcher.switch_scene("res://scenes/planets/iron_planet_main.tscn")
+	SceneSwitcher.switch_scene("res://scenes/planet_scene.tscn", Globals.PlanetName.IRON)
 
 
 func _ruru_timeline_defeated() -> void:
-	SceneSwitcher.switch_scene(Globals.planet_scenes[target_planet])
+	SceneSwitcher.switch_scene("res://scenes/planet_scene.tscn", Globals.PlanetName.ANTIMATTER)
 
 
 func _on_notify_healthbar(new_health: float) -> void:

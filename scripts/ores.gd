@@ -1,6 +1,5 @@
 extends Area2D
 
-# i should have turned the planets themselves into templates too... too late i guess
 signal notify_healthbar(new_health: int)
 
 const Globals = preload("res://scripts/globals.gd")
@@ -9,15 +8,15 @@ const Globals = preload("res://scripts/globals.gd")
 @onready var collider: CollisionShape2D = $%OreCollisionShape
 @onready var healthbar: TextureProgressBar = $HealthBar
 
-@export var ore_type: Globals.PlanetName # this is so fkn confusing hahaha
-@export var max_health: int = 10
-@export var ore_texture: Texture2D
-@export var ore_size: Vector2 = Vector2.ZERO  # Leave at (0,0) to use original texture size
-@export var reward_amount: int = 1
-@export var price: int = 1
-
+var ore_type: Globals.PlanetName
+var ore_texture: Texture2D
+var max_health: int
+var current_health: int
+var ore_size: Vector2 = Vector2.ZERO  # Leave at (0,0) to use original texture size
+var reward_amount: int
+var price: int
 var screen_size: Vector2
-var current_health: int = 0
+
 var max_health_by_type: Dictionary[Globals.PlanetName, int] = {
 	Globals.PlanetName.IRON: 10,
 	Globals.PlanetName.DIAMOND: 100,
@@ -27,7 +26,7 @@ var max_health_by_type: Dictionary[Globals.PlanetName, int] = {
 	Globals.PlanetName.EXOTIC_MATTER: 2000,
 	Globals.PlanetName.STARDUST: 7500,
 	Globals.PlanetName.ICE_CREAM: 50000,
-	Globals.PlanetName.ANTIMATTER: 15000
+	Globals.PlanetName.ANTIMATTER: 15000,
 }
 
 var ore_type_to_name: Dictionary[Globals.PlanetName, String] = {
@@ -39,26 +38,47 @@ var ore_type_to_name: Dictionary[Globals.PlanetName, String] = {
 	Globals.PlanetName.EXOTIC_MATTER: "Exotic Matter",
 	Globals.PlanetName.STARDUST: "Stardust",
 	Globals.PlanetName.ICE_CREAM: "Magical Ice Cream",
-	Globals.PlanetName.ANTIMATTER: "Mysterious Antimatter"
+	Globals.PlanetName.ANTIMATTER: "Mysterious Antimatter",
 }
 
-var ore_textures: Dictionary[Globals.PlanetName, String] = {
-	Globals.PlanetName.IRON: "res://tres/iron_ore.tres",
-	Globals.PlanetName.DIAMOND: "res://tres/diamond_ore.tres",
-	Globals.PlanetName.OBSIDIAN: "res://tres/obsidian.tres",
-	Globals.PlanetName.PLATINUM: "res://tres/platinum.tres",
-	Globals.PlanetName.MAGMA: "res://tres/magma.tres",
-	Globals.PlanetName.EXOTIC_MATTER: "res://tres/exotic_matter.tres",
-	Globals.PlanetName.STARDUST: "res://tres/stardust.tres",
-	Globals.PlanetName.ICE_CREAM: "res://img/ores/ice_cream.png",
-	Globals.PlanetName.ANTIMATTER: "res://tres/antimatter.tres"
+var reward_by_type: Dictionary[Globals.PlanetName, int] = {
+	Globals.PlanetName.IRON: 1,
+	Globals.PlanetName.DIAMOND: 2,
+	Globals.PlanetName.OBSIDIAN: 3,
+	Globals.PlanetName.PLATINUM: 2,
+	Globals.PlanetName.MAGMA: 5,
+	Globals.PlanetName.EXOTIC_MATTER: 1,
+	Globals.PlanetName.STARDUST: 1,
+	Globals.PlanetName.ICE_CREAM: 1,
+	Globals.PlanetName.ANTIMATTER: 1,
+}
+
+var price_by_type: Dictionary[Globals.PlanetName, int] = {
+	Globals.PlanetName.IRON: 1,
+	Globals.PlanetName.DIAMOND: 100,
+	Globals.PlanetName.OBSIDIAN: 150,
+	Globals.PlanetName.PLATINUM: 300,
+	Globals.PlanetName.MAGMA: 500,
+	Globals.PlanetName.EXOTIC_MATTER: 1000,
+	Globals.PlanetName.STARDUST: 5000,
+	Globals.PlanetName.ICE_CREAM: 50000,
+	Globals.PlanetName.ANTIMATTER: 10000,
+}
+
+var ore_textures: Dictionary[Globals.PlanetName, Texture2D] = {
+	Globals.PlanetName.IRON: preload("res://tres/iron_ore.tres"),
+	Globals.PlanetName.DIAMOND: preload("res://tres/diamond_ore.tres"),
+	Globals.PlanetName.OBSIDIAN: preload("res://tres/obsidian.tres"),
+	Globals.PlanetName.PLATINUM: preload("res://tres/platinum.tres"),
+	Globals.PlanetName.MAGMA: preload("res://tres/magma.tres"),
+	Globals.PlanetName.EXOTIC_MATTER: preload("res://tres/exotic_matter.tres"),
+	Globals.PlanetName.STARDUST: preload("res://tres/stardust.tres"),
+	Globals.PlanetName.ICE_CREAM: preload("res://img/ores/ice_cream.png"),
+	Globals.PlanetName.ANTIMATTER: preload("res://tres/antimatter.tres"),
 }
 
 
-func _ready():
-	# much of this was done by ChatGPT when i first started with this,
-	# and i have no idea what i am looking at...
-	
+func _ready():	
 	screen_size = get_viewport_rect().size
 	position = Vector2(screen_size.x * 0.5, screen_size.y * 0.5)
 	
@@ -75,6 +95,19 @@ func _ready():
 	else:
 		push_warning("No texture assigned to ore_texture")
 	connect("input_event", Callable(self, "_on_input_event"))
+
+
+func set_stats(this_ore_type: Globals.PlanetName) -> void:
+	max_health = max_health_by_type[this_ore_type]
+	current_health = max_health
+	ore_texture = ore_textures[this_ore_type]
+	ore_type = this_ore_type
+	ore_size = Vector2.ZERO
+	reward_amount = reward_by_type[this_ore_type]
+	price = price_by_type[this_ore_type]
+	sprite.texture = ore_textures[this_ore_type]
+	
+	print_debug("health %s, health %s, type %s, reward %s, price %s" % [max_health, current_health, ore_type, reward_amount, price])
 
 
 func _on_input_event(_viewport, event, _shape_idx):

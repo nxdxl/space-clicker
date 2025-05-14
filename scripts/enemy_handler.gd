@@ -67,14 +67,13 @@ func set_stats(planet_: Globals.PlanetName) -> void:
 		attack = (Player.health / randi() % 20) + 1
 		space_dollars = Ores.max_health_by_type[planet] / 10 + Player.damage
 		sprite.texture = enemey_textures()[randi() % 8]
-		target_scene = Globals.planet_scenes[planet_]
 		return
 	
 	if (!Player.defeated_ruru and (planet_ == Globals.PlanetName.ANTIMATTER)):
 		Dialogic.start("ruru_encounter")
 		Dialogic.timeline_ended.connect(_spawn_ruru)
 	else:
-		SceneSwitcher.switch_scene(Globals.planet_scenes[planet_])
+		SceneSwitcher.switch_scene("res://scenes/planet_scene.tscn", planet)
 
 
 func _spawn_ruru() -> void:
@@ -83,7 +82,6 @@ func _spawn_ruru() -> void:
 	attack = Player.health * 0.1
 	space_dollars = 0
 	sprite.texture = preload("res://img/characters/ruru/ruru_default.png")
-	target_scene = Globals.planet_scenes[planet]
 	emit_signal("create_ruru")
 
 

@@ -35,7 +35,6 @@ static var planet_requirements: Dictionary[PlanetName, Dictionary] = {
 	PlanetName.ICE_CREAM: {
 		Item.ItemName.METEORITE_SHIELD: 1,
 		# and also defeat ruru, but i can't handle that in here, sigh
-		# i hate myself
 	},
 	PlanetName.IRON: {
 		Item.ItemName.ENGINE: 0
@@ -86,16 +85,16 @@ static var mining_requirements: Dictionary[PlanetName, Dictionary] = {
 	},
 }
 
-static var planet_animation_nodes: Dictionary[PlanetName, NodePath] = {
-	PlanetName.ANTIMATTER: "res://scenes/planets/antimatter_blackhole.tscn",
-	PlanetName.DIAMOND: "res://scenes/planets/diamond_planet.tscn",
-	PlanetName.EXOTIC_MATTER: "res://scenes/planets/exotic_matter_galaxy.tscn",
-	PlanetName.ICE_CREAM: "res://scenes/planets/ice_cream_planet.tscn",
-	PlanetName.IRON: "res://scenes/planets/iron_planet.tscn",
-	PlanetName.MAGMA: "res://scenes/planets/magma_planet.tscn",
-	PlanetName.OBSIDIAN: "res://scenes/planets/obsidian_planet.tscn",
-	PlanetName.PLATINUM: "res://scenes/planets/platinum_planet.tscn",
-	PlanetName.STARDUST: "res://scenes/planets/stardust_planet.tscn",
+static var planet_animation_nodes: Dictionary[PlanetName, Resource] = {
+	PlanetName.ANTIMATTER: preload("res://scenes/planets/antimatter_blackhole.tscn"),
+	PlanetName.DIAMOND: preload("res://scenes/planets/diamond_planet.tscn"),
+	PlanetName.EXOTIC_MATTER: preload("res://scenes/planets/exotic_matter_galaxy.tscn"),
+	PlanetName.ICE_CREAM: preload("res://scenes/planets/ice_cream_planet.tscn"),
+	PlanetName.IRON: preload("res://scenes/planets/iron_planet.tscn"),
+	PlanetName.MAGMA: preload("res://scenes/planets/magma_planet.tscn"),
+	PlanetName.OBSIDIAN: preload("res://scenes/planets/obsidian_planet.tscn"),
+	PlanetName.PLATINUM: preload("res://scenes/planets/platinum_planet.tscn"),
+	PlanetName.STARDUST: preload("res://scenes/planets/stardust_planet.tscn"),
 }
 
 static var planet_types: Dictionary[PlanetName, PlanetType] = {
@@ -110,14 +109,14 @@ static var planet_types: Dictionary[PlanetName, PlanetType] = {
 	PlanetName.STARDUST: PlanetType.PLANET,
 }
 
-static var planet_scenes: Dictionary[PlanetName, NodePath] = {
-	PlanetName.ANTIMATTER: "res://scenes/planets/antimatter_blackhole_main.tscn",
-	PlanetName.DIAMOND: "res://scenes/planets/diamond_planet_main.tscn",
-	PlanetName.EXOTIC_MATTER: "res://scenes/planets/exotic_matter_galaxy_main.tscn",
-	PlanetName.ICE_CREAM: "res://scenes/planets/ice_cream_planet_main.tscn",
-	PlanetName.IRON: "res://scenes/planets/iron_planet_main.tscn",
-	PlanetName.MAGMA: "res://scenes/planets/magma_planet_main.tscn",
-	PlanetName.OBSIDIAN: "res://scenes/planets/obsidian_planet_main.tscn",
-	PlanetName.PLATINUM: "res://scenes/planets/platinum_planet_main.tscn",
-	PlanetName.STARDUST: "res://scenes/planets/stardust_planet_main.tscn",
+static var planet_background_textures: Dictionary[PlanetName, Texture2D] = {
+	PlanetName.ANTIMATTER: preload("res://img/backgrounds/antimatter_background.png"),
+	PlanetName.DIAMOND: preload("res://img/backgrounds/diamond_planet_background.png"),
+	PlanetName.EXOTIC_MATTER: preload("res://img/backgrounds/exotic_matter_galaxy_background.png"),
+	PlanetName.ICE_CREAM: preload("res://img/backgrounds/ice_cream_planet_background.png"),
+	PlanetName.IRON: preload("res://img/backgrounds/iron_planet_background.png"),
+	PlanetName.MAGMA: preload("res://img/backgrounds/magma_planet_background.png"),
+	PlanetName.OBSIDIAN: preload("res://img/backgrounds/obsidian_planet_background.png"),
+	PlanetName.PLATINUM: preload("res://img/backgrounds/platinum_planet_background.png"),
+	PlanetName.STARDUST: preload("res://img/backgrounds/stardust_planet_background.png"),
 }

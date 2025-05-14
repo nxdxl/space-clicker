@@ -232,7 +232,7 @@ func _add_player_items(scene_name: String) -> void:
 		var ore_type: Globals.PlanetName = Globals.PlanetName.get(ore)
 		if ore_type == Globals.PlanetName.ICE_CREAM:
 			continue
-		player_item_list.add_item(str(Player.ore_dictionary[ore_type]), load(Ores.ore_textures[ore_type]), false)
+		player_item_list.add_item(str(Player.ore_dictionary[ore_type]), Ores.ore_textures[ore_type], false)
 
 
 func _refresh_player_items(scene_name: String) -> void:

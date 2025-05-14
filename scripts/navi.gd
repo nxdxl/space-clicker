@@ -13,7 +13,7 @@ func _ready():
 	# instantiate planets
 	for planet in Globals.planet_animation_nodes.keys():
 		var scene_path = Globals.planet_animation_nodes[planet]
-		var scene_res: PackedScene = load(scene_path)
+		var scene_res: PackedScene = scene_path
 		var instance = scene_res.instantiate()
 		if !planet_available(planet):
 			instance.modulate = Color(0.4, 0.4, 0.4, 1)
@@ -57,7 +57,6 @@ func _ready():
 
 func planet_available(planet: Globals.PlanetName) -> bool:
 	for req: Item.ItemName in Globals.planet_requirements[planet]:
-		# fu... this will be horrendously poor performing. curse me for structuring it like this
 		for item in Player.item_list:
 			if req == item.item_type:
 				var req_lev = Globals.planet_requirements[planet][req]
@@ -98,18 +97,14 @@ func _stop_animation(planet_name: Globals.PlanetName) -> void:
 
 
 func _on_planet_mouse_entered(planet: Globals.PlanetName) -> void:
-	if rotating:
-		return
-	if !planet_available(planet):
+	if (not planet_available(planet)) or rotating:
 		return
 	rotating = true
 	_start_animation(planet)
 
 
 func _on_planet_mouse_exited(planet: Globals.PlanetName) -> void:
-	if not rotating:
-		return
-	if !planet_available(planet):
+	if (not rotating) or (not planet_available(planet)):
 		return
 	rotating = false
 	_stop_animation(planet)
