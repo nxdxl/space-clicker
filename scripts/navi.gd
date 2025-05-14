@@ -123,42 +123,7 @@ func _on_planet_input_event(_viewport, event, _shape_idx, planet: Globals.Planet
 			for req in reqs:
 				for itm in Globals.planet_requirements[planet]:
 					req_string = Item.item_names[itm][Globals.planet_requirements[planet][itm]] + ", "
-			_show_warning("This planet isn't available yet. \nRequirements: %s" % req_string.substr(0, req_string.length() - 2))
+			InfoPopupManager.show_warning("This planet isn't available yet. \nRequirements: %s" % req_string.substr(0, req_string.length() - 2))
 			return
-		AudioPlayer.play_sound(AudioPlayer.Sound.ButtonClick)
+		AudioPlayer.play_sound(AudioPlayer.Sound.BUTTON_CLICK)
 		SceneSwitcher.switch_scene("res://scenes/fight_scene.tscn", planet)
-
-# ************* #
-# i'm so cooked #
-# ************* #
-
-func _info_warning_open(mode: String, scene: Control, animation_player: AnimationPlayer, text: String) -> void:
-	# all these hacks... i hate reading my own code man, this is such an atrocity
-	scene._ready()
-	var warning_icon = preload("res://img/ui/popup/warning_icon_red.png")
-	var info_icon = preload("res://img/ui/popup/info_icon_yellow.png")
-	
-	if mode == "info":
-		scene.set_title("Info")
-		scene.set_icon(info_icon)
-		scene.set_text(text)
-	else:
-		scene.set_title("Warning")
-		scene.set_icon(warning_icon)
-		scene.set_text(text)
-	scene.visible = true
-	
-	animation_player.play("pop_up_animation")
-
-
-func _show_warning(text: String) -> void:
-	var warning_popup: Control = $InfoPopUp
-	var warning_animation_player: AnimationPlayer = $InfoPopUp/PopUpAnimation
-	AudioPlayer.play_sound(AudioPlayer.Sound.UIError)
-	_info_warning_open("warning", warning_popup, warning_animation_player, text)
-
-
-func _show_info(text: String) -> void:
-	var info_popup: Control = $InfoPopUp
-	var info_animation_player: AnimationPlayer = $InfoPopUp/PopUpAnimation
-	_info_warning_open("info", info_popup, info_animation_player, text)

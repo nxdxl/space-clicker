@@ -2,7 +2,6 @@ extends Control
 
 const BUTTON_SCALE := 0.15  # percent of shorter screen side
 const Globals = preload("res://scripts/globals.gd")
-const Info = preload("res://scripts/info_warning_popup.gd")
 
 @onready var furo_image: TextureRect = $FuroImage
 @onready var ruru_image: TextureRect = $RuruImage
@@ -124,11 +123,11 @@ func character_fade_in(image: TextureRect, anim: AnimationPlayer) -> void:
 
 
 func show_navi_button_popup() -> void:
-	_show_info("Clicking on the explore button in the middle will take you to the navigation system! Try it out!")
+	InfoPopupManager.show_info("Clicking on the explore button in the middle will take you to the navigation system! Try it out!")
 
 
 func show_upgrade_popup() -> void:
-	_show_info("With the just mined ore, you can now upgrade your ship! What does the upgrade do you ask? Well, don't ask!")
+	InfoPopupManager.show_info("With the just mined ore, you can now upgrade your ship! What does the upgrade do you ask? Well, don't ask!")
 
 
 func play_pop_up_animation(animation_player: AnimationPlayer) -> void:
@@ -175,7 +174,7 @@ func open_workshop() -> void:
 
 
 func _open_sleep():
-	_show_info("Clicking in the top button to sleep will save the game. The gamestate is also saved every 60 seconds.")
+	InfoPopupManager.show_info("Clicking in the top button to sleep will save the game. The gamestate is also saved every 60 seconds.")
 	Player.checkpoints["sleep"] = true
 
 
@@ -258,38 +257,6 @@ func _create_button(button_name: ButtonName, button_size: float) -> TextureButto
 	return btn
 
 
-func _info_warning_open(mode: String, scene: Control, animation_player: AnimationPlayer, text: String) -> void:
-	# all these hacks... i hate reading my own code man, this is such an atrocity
-	scene._ready()
-	var warning_icon = preload("res://img/ui/popup/warning_icon_red.png")
-	var info_icon = preload("res://img/ui/popup/info_icon_yellow.png")
-	
-	if mode == "info":
-		scene.set_title("Info")
-		scene.set_icon(info_icon)
-		scene.set_text(text)
-	else:
-		scene.set_title("Warning")
-		scene.set_icon(warning_icon)
-		scene.set_text(text)
-	scene.visible = true
-	
-	animation_player.play("pop_up_animation")
-
-
-func _show_warning(text: String) -> void:
-	var warning_popup: Control = $InfoPopUp
-	var warning_animation_player: AnimationPlayer = $InfoPopUp/PopUpAnimation
-	AudioPlayer.play_sound(AudioPlayer.Sound.UIError)
-	_info_warning_open("warning", warning_popup, warning_animation_player, text)
-
-
-func _show_info(text: String) -> void:
-	var info_popup: Control = $InfoPopUp
-	var info_animation_player: AnimationPlayer = $InfoPopUp/PopUpAnimation
-	_info_warning_open("info", info_popup, info_animation_player, text)
-
-
 func _button_pressed(button_name: ButtonName) -> void:
 	
 	match button_name:
@@ -297,19 +264,19 @@ func _button_pressed(button_name: ButtonName) -> void:
 			get_tree().quit(0)
 		ButtonName.NAMAZON:
 			if !Player.checkpoints["intro_six"] or !Player.checkpoints["intro_eight"]:
-				_show_warning("You can't do that yet.")
+				InfoPopupManager.show_warning("You can't do that yet.")
 				return
 			open_namazon()
-			AudioPlayer.play_sound(AudioPlayer.Sound.ButtonClick)
+			AudioPlayer.play_sound(AudioPlayer.Sound.BUTTON_CLICK)
 		ButtonName.WORKSHOP:
 			if !Player.checkpoints["intro_six"]:
-				_show_warning("You can't do that yet.")
+				InfoPopupManager.show_warning("You can't do that yet.")
 				return
 			open_workshop()
-			AudioPlayer.play_sound(AudioPlayer.Sound.ButtonClick)
+			AudioPlayer.play_sound(AudioPlayer.Sound.BUTTON_CLICK)
 		ButtonName.SLEEP:
 			Player._save_state()
-			_show_info("Game Saved")
-			AudioPlayer.play_sound(AudioPlayer.Sound.ButtonClick)
+			InfoPopupManager.show_info("Game Saved")
+			AudioPlayer.play_sound(AudioPlayer.Sound.BUTTON_CLICK)
 		ButtonName.NAVI:
 			SceneSwitcher.switch_scene(navi_scene_path)

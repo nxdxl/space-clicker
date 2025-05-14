@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://6q857yu0gjq4"]
+[gd_scene load_steps=17 format=3 uid="uid://6q857yu0gjq4"]
 
 [ext_resource type="Script" uid="uid://c8yjagulm82hw" path="res://scripts/bridge.gd" id="1_1q54l"]
 [ext_resource type="Texture2D" uid="uid://df7awq87w0soa" path="res://img/backgrounds/main_background.png" id="1_im2sa"]
@@ -11,7 +11,6 @@
 [ext_resource type="Texture2D" uid="uid://bwcb07fkup234" path="res://img/characters/furo/furo_normal.png" id="9_f5kyn"]
 [ext_resource type="PackedScene" uid="uid://btjjifrf6n8t5" path="res://scenes/pop_up_window.tscn" id="10_did7l"]
 [ext_resource type="Texture2D" uid="uid://ce8hl817ulvvi" path="res://img/characters/ruru/ruru_smile.png" id="10_ea2tt"]
-[ext_resource type="PackedScene" uid="uid://cg4scer0ftj64" path="res://scenes/info_pop_up.tscn" id="10_f5kyn"]
 [ext_resource type="AudioStream" uid="uid://cq4wsvoijv340" path="res://audio/music/bridge.ogg" id="13_j310b"]
 
 [sub_resource type="Animation" id="Animation_ea2tt"]
@@ -144,9 +143,6 @@ visible = false
 layout_mode = 1
 
 [node name="WorkshopPopUp" parent="." instance=ExtResource("10_did7l")]
-layout_mode = 1
-
-[node name="InfoPopUp" parent="." instance=ExtResource("10_f5kyn")]
 layout_mode = 1
 
 [node name="BGM" type="AudioStreamPlayer2D" parent="."]

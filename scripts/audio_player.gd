@@ -2,16 +2,16 @@ extends Node
 
 
 enum Sound {
-	UIError,
-	ButtonClick,
-	Upgrade
+	UI_ERROR,
+	BUTTON_CLICK,
+	UPGRADE
 }
 
 
 var audio_sources: Dictionary[Sound, Resource] = {
-	Sound.UIError: preload("res://audio/ui/error.ogg"),
-	Sound.ButtonClick: preload("res://audio/ui/button_click.ogg"),
-	Sound.Upgrade: preload("res://audio/ui/upgrade.ogg")
+	Sound.UI_ERROR: preload("res://audio/ui/error.ogg"),
+	Sound.BUTTON_CLICK: preload("res://audio/ui/button_click.ogg"),
+	Sound.UPGRADE: preload("res://audio/ui/upgrade.ogg")
 }
 
 

@@ -23,6 +23,7 @@ Ores="*res://scripts/ores.gd"
 Item="res://scripts/item.gd"
 Dialogic="*res://addons/dialogic/Core/DialogicGameHandler.gd"
 AudioPlayer="*res://scripts/audio_player.gd"
+InfoPopupManager="*res://scripts/info_popup_manager.gd"
 
 [dialogic]
 

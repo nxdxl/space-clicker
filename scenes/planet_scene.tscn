@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://dwdp8devas75v"]
+[gd_scene load_steps=8 format=3 uid="uid://dwdp8devas75v"]
 
 [ext_resource type="Script" uid="uid://bcglkwopaiaj1" path="res://scripts/fight_handler.gd" id="1_1ygun"]
 [ext_resource type="Texture2D" uid="uid://df7awq87w0soa" path="res://img/backgrounds/main_background.png" id="2_qqgp0"]
@@ -6,7 +6,6 @@
 [ext_resource type="Script" uid="uid://oj172dymblsc" path="res://scripts/button_animation.gd" id="4_53qvf"]
 [ext_resource type="Texture2D" uid="uid://cty5ov15u0a7g" path="res://img/ui/Frame 49.png" id="5_5va2b"]
 [ext_resource type="Texture2D" uid="uid://bg88se71rrxqx" path="res://img/ui/Frame 50(3).png" id="6_dom0f"]
-[ext_resource type="PackedScene" uid="uid://cg4scer0ftj64" path="res://scenes/info_pop_up.tscn" id="7_j1g60"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_reipo"]
 texture = ExtResource("2_qqgp0")
@@ -82,9 +81,6 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_vertical = 3
 mouse_filter = 2
-
-[node name="InfoPopUp" parent="." instance=ExtResource("7_j1g60")]
-layout_mode = 1
 
 [node name="BGM" type="AudioStreamPlayer2D" parent="."]
 

@@ -1,10 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://cl2rh23qjec75"]
+[gd_scene load_steps=6 format=3 uid="uid://cl2rh23qjec75"]
 
 [ext_resource type="Script" uid="uid://ve61h5n1fhks" path="res://scripts/navi.gd" id="1_1cnw1"]
 [ext_resource type="Texture2D" uid="uid://df7awq87w0soa" path="res://img/backgrounds/main_background.png" id="1_shmmk"]
 [ext_resource type="StyleBox" uid="uid://l7ml62qm5sdc" path="res://tres/presets/button_style.tres" id="3_cf0qp"]
 [ext_resource type="Script" uid="uid://oj172dymblsc" path="res://scripts/button_animation.gd" id="4_bmq6p"]
-[ext_resource type="PackedScene" uid="uid://cg4scer0ftj64" path="res://scenes/info_pop_up.tscn" id="5_7swvt"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cf0qp"]
 bg_color = Color(0.491466, 0.532646, 0.977889, 1)
@@ -64,8 +63,5 @@ theme_override_styles/pressed = ExtResource("3_cf0qp")
 theme_override_styles/normal = SubResource("StyleBoxFlat_cf0qp")
 text = "  RETURN  "
 script = ExtResource("4_bmq6p")
-
-[node name="InfoPopUp" parent="." instance=ExtResource("5_7swvt")]
-layout_mode = 1
 
 [connection signal="pressed" from="MarginContainer/NaviBackToMenuButton" to="." method="_on_navi_back_to_menu_button_pressed"]
