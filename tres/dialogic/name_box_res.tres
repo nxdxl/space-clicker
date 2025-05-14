@@ -1,0 +1,13 @@
+[gd_resource type="StyleBoxTexture" load_steps=2 format=3 uid="uid://gsvk63wrrnpp"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_a10vq"]
+load_path = "res://.godot/imported/text_box.png-8fa822a67fccefbb29a166860f33f415.ctex"
+
+[resource]
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+texture = SubResource("CompressedTexture2D_a10vq")
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2

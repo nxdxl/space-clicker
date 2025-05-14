@@ -1,0 +1,7 @@
+join ruru (smile) center
+[voice path="res://audio/voice/ruru/ruru_line-009.wav" volume="0.0"]
+ruru: Come back when you're stronger, kiddo
+player: ...!
+join furo right
+furo: I can't believe you'd fumble it like that.
+leave --All--

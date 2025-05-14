@@ -1,0 +1,53 @@
+[gd_resource type="SpriteFrames" load_steps=8 format=3 uid="uid://bpqtg0hvwlvsp"]
+
+[ext_resource type="Texture2D" uid="uid://ctoy2ji6ai2ic" path="res://img/currency/gold_coin.png" id="1_glkpy"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qs7jj"]
+atlas = ExtResource("1_glkpy")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_phpa6"]
+atlas = ExtResource("1_glkpy")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x6xtl"]
+atlas = ExtResource("1_glkpy")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6x438"]
+atlas = ExtResource("1_glkpy")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gmxus"]
+atlas = ExtResource("1_glkpy")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n5sm4"]
+atlas = ExtResource("1_glkpy")
+region = Rect2(80, 0, 16, 16)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qs7jj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_phpa6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x6xtl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6x438")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gmxus")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n5sm4")
+}],
+"loop": true,
+"name": &"main_animation",
+"speed": 5.0
+}]

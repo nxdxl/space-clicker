@@ -1,0 +1,24 @@
+join ruru (default) center
+[voice path="res://audio/voice/ruru/ruru_line-001.wav" volume="0.0"]
+ruru (smile): Who are you!
+player: I am... Just a hero passing by?
+[voice path="res://audio/voice/ruru/ruru_line-002.wav" volume="0.0"]
+ruru: A hero?! Why would a hero come to the ends of the universe?
+[voice path="res://audio/voice/ruru/ruru_line-003.wav" volume="0.0"]
+ruru (default): That doesn't sound convincing!
+[voice path="res://audio/voice/ruru/ruru_line-004.wav" volume="0.0"]
+ruru: What do you want here?
+player: I am searching the surrounding planets for Antimatter.
+[voice path="res://audio/voice/ruru/ruru_line-005.wav" volume="0.0"]
+ruru: Why would that bring you to my beloved black hole?
+player: Because there is a chance that there is Antimatter?
+[voice path="res://audio/voice/ruru/ruru_line-006.wav" volume="0.0"]
+ruru (smile): NO! There is not!
+player: That doesn't sound convincing!
+[voice path="res://audio/voice/ruru/ruru_line-007.wav" volume="0.0"]
+ruru: You! You shall not pass!
+player: Pfff. We're so getting copyright striked.
+[voice path="res://audio/voice/ruru/ruru_line-008.wav" volume="0.0"]
+ruru (default): Prepare, for here I come!
+player: ...
+leave --All--

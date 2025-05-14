@@ -1,0 +1,7 @@
+[gd_resource type="AtlasTexture" load_steps=2 format=3 uid="uid://dkreqtafp8lpi"]
+
+[ext_resource type="Texture2D" uid="uid://dh0tmq4piubx7" path="res://img/ores/ore_sheet.png" id="1_6a6kd"]
+
+[resource]
+atlas = ExtResource("1_6a6kd")
+region = Rect2(0, 0, 256, 256)

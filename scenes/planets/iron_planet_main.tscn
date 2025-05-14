@@ -1,0 +1,92 @@
+[gd_scene load_steps=10 format=3 uid="uid://b88t33ln843ce"]
+
+[ext_resource type="Script" uid="uid://yf4jj8dvacyi" path="res://scripts/planet.gd" id="1_474hi"]
+[ext_resource type="Texture2D" uid="uid://cinl2x5hlleob" path="res://img/backgrounds/iron_planet_background.png" id="2_474hi"]
+[ext_resource type="StyleBox" uid="uid://l7ml62qm5sdc" path="res://tres/presets/button_style.tres" id="2_ak1k4"]
+[ext_resource type="PackedScene" uid="uid://j67sscb7foyg" path="res://scenes/ore_template.tscn" id="3_hwg6m"]
+[ext_resource type="Texture2D" uid="uid://d4a8a2t7ix88x" path="res://tres/iron_ore.tres" id="4_dy5um"]
+[ext_resource type="Script" uid="uid://oj172dymblsc" path="res://scripts/button_animation.gd" id="4_hwg6m"]
+[ext_resource type="Texture2D" uid="uid://cty5ov15u0a7g" path="res://img/ui/Frame 49.png" id="5_11fd6"]
+[ext_resource type="Texture2D" uid="uid://bg88se71rrxqx" path="res://img/ui/Frame 50(3).png" id="6_0iipc"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_hwg6m"]
+texture = ExtResource("2_474hi")
+modulate_color = Color(0.481789, 0.481789, 0.481789, 1)
+
+[node name="IronPlanetMain" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_474hi")
+ore_type = 4
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_hwg6m")
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 2
+offset_left = 100.0
+offset_top = 100.0
+offset_right = 254.0
+offset_bottom = 165.0
+size_flags_horizontal = 0
+theme_override_constants/outline_size = 20
+theme_override_font_sizes/font_size = 40
+theme_override_styles/focus = ExtResource("2_ak1k4")
+theme_override_styles/hover = ExtResource("2_ak1k4")
+theme_override_styles/pressed = ExtResource("2_ak1k4")
+theme_override_styles/normal = ExtResource("2_ak1k4")
+text = "  BACK  "
+script = ExtResource("4_hwg6m")
+
+[node name="HealthBar" type="TextureProgressBar" parent="."]
+custom_minimum_size = Vector2(500, 64)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -250.0
+offset_top = -32.0
+offset_right = 250.0
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+max_value = 0.0
+nine_patch_stretch = true
+stretch_margin_left = 32
+stretch_margin_top = 5
+stretch_margin_right = 32
+stretch_margin_bottom = 5
+texture_under = ExtResource("5_11fd6")
+texture_progress = ExtResource("6_0iipc")
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="OreTemplate" parent="CenterContainer" instance=ExtResource("3_hwg6m")]
+ore_type = 4
+ore_texture = ExtResource("4_dy5um")
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[connection signal="notify_healthbar" from="CenterContainer/OreTemplate" to="." method="_on_ore_template_notify_healthbar"]

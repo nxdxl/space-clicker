@@ -1,0 +1,19 @@
+join ruru (default) center
+[voice path="res://audio/voice/ruru/ruru_line-010.wav" volume="0.0"]
+ruru: I... I can't believe I lost...
+player: Happens to the best of us. Don't sweat it.
+[voice path="res://audio/voice/ruru/ruru_line-011.wav" volume="0.0"]
+ruru: What are you going to do with my black hole now? (much sad)
+player: I'll just check if you got what we want. I'll be gone in the blink of an eye.
+[voice path="res://audio/voice/ruru/ruru_line-012.wav" volume="0.0"]
+ruru: Can I come with you?
+player: What...? Why?
+[voice path="res://audio/voice/ruru/ruru_line-013.wav" volume="0.0"]
+ruru: Can't I?
+player: Fine...
+join furo (angry) right
+furo: Hey. I got something to say to that too!
+player: No you don't.
+[voice path="res://audio/voice/ruru/ruru_line-014.wav" volume="0.0"]
+ruru: Yay.
+leave --All--

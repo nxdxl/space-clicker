@@ -1,0 +1,66 @@
+[gd_scene load_steps=7 format=3 uid="uid://bk7ooqg57sq5d"]
+
+[ext_resource type="Texture2D" uid="uid://bdrhelfwwblc1" path="res://img/backgrounds/exotic_matter_galaxy_background.png" id="1_tqlpn"]
+[ext_resource type="StyleBox" uid="uid://l7ml62qm5sdc" path="res://tres/presets/button_style.tres" id="2_tqlpn"]
+[ext_resource type="PackedScene" uid="uid://j67sscb7foyg" path="res://scenes/ore_template.tscn" id="3_j1baq"]
+[ext_resource type="Texture2D" uid="uid://b2xajhflefb7y" path="res://tres/antimatter.tres" id="4_tqlpn"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_j1baq"]
+texture = ExtResource("1_tqlpn")
+modulate_color = Color(0.552956, 0.552956, 0.552956, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_djur4"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_j1baq")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_djur4")
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_top = 100
+theme_override_constants/margin_right = 100
+theme_override_constants/margin_bottom = 100
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_constants/outline_size = 20
+theme_override_font_sizes/font_size = 40
+theme_override_styles/focus = ExtResource("2_tqlpn")
+theme_override_styles/hover = ExtResource("2_tqlpn")
+theme_override_styles/pressed = ExtResource("2_tqlpn")
+theme_override_styles/normal = ExtResource("2_tqlpn")
+text = "  BACK  "
+
+[node name="CenterContainer" type="CenterContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="OreTemplate" parent="PanelContainer/MarginContainer/VBoxContainer/CenterContainer" instance=ExtResource("3_j1baq")]
+ore_texture = ExtResource("4_tqlpn")

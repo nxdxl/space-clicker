@@ -1,0 +1,185 @@
+---- intro ----
+F: So you finally woke up. We have a mission to complete. How long do you intent to play dead.
+P: ...
+F: What?
+P: Who... are you?
+F: Oh come on. Did you hit your head too hard? Sigh... I'm Furo. I'm your guide for what it's worth.
+P: My guide?
+F: So you really don't remember huh... We're on a special mission given to us by the almighty galactic emperor and ruler of the known universe Mr. Orange himself. We're supposed to find Antimatter so that the great chosen one can conquer even the most remote parts of the universe and extend hiss influence into the unknown universe as well.
+P: I was chosen for that?
+F: We. And I don't get it either. An idiot like you, with a genius like me..?
+P: Ey..
+F: Okay... Since you don't remember, let me show you around the bridge. You are currently aboard the holy empirial space station. This is the control room, also called "The Bridge". This will be our base of operations from now on. *pause* In order to find the much needed Antimatter, we need to explore the planets in our vicinity. We should be close already. We weren't give nthe best equipment though, unfortunately. (for plot reasons)
+P: Plot reasons...?
+F: That's why we should first explore planets closer to to us and see if we can somehow manage to upgrade our equipment.
+P: You're just ignoring it??
+F: Here. Click this button. It will open the Navi showing the planets in our surroundings.
+F: Good. Now hover over one of the planets. It will show you some basic information.
+F: When you click on it, I will deploy a small satellite ship with which we can explore the world and mine minerals. Beware, on your way to distant planets, you maay encounter unforseen... circumstances...
+P: Unforseen circumstances?
+F: Anyway. Try it.
+P: Bro, you ignoring me again?
+P: So this is what you mean by unforseen circumstances...
+F: Yes (whispering full of joy)
+P: You happy about this?
+F: I don't know what you're talking about, insect. Go ahead and defeat it if you can...
+P: ...
+F: Tsk...
+P: Did you just snuff at me surviving???
+F: Alright, you arrived at your destination. Now go and do what you came here for.
+F: Okay. Enough for now. Let's go back to the station and secure what we just mined.
+F: Good... job... (Saying this reluctantly)
+F: Great. You jsut wasted all our ore on a useless upgrade. Way to go.
+P: ...
+F: There is also a board computer with which you can access Namazon. They deliver pretty quickly these days, even on these outer parts of the universe. Maybe you should order a rope or something...
+P: Why do you hate me so much..? -.-
+F: Huh. Do I come across like I hate you? That was (not) my intention.
+F: Oh right. I almost forgot. If you feel tired... or just want to use that rope, we all have our personal chambers.
+---- end of intro ----
+
+---- you found antimatter ----
+F: Finally. This took way too long. What are we supposed to report to Mr. Orange???
+P: You really don't change huh...
+---- antimatter end ----
+
+---- you found ice cream ----
+F: ...! I- i- ice-- cream...!
+P: ...
+F: It's not like I want it or anything!
+P: Right. Then let's go home, I don't think this is going to help us with our ship.
+F: But it also doesn't hurt, does it?
+P: heh.
+F: mh!
+---- ice cream end ----
+
+---- you found exotic matter ----
+F: Huh. This looks pretty... exotic.
+P: Wow.
+F: What.
+---- exotic matter end ----
+
+---- Encounter with Ruru ----
+R: Who are you!
+P: I am... just passing by?
+R: That doesn't sound convincing! What do you want here?
+P: I am searching the surrounding planets for Antimatter.
+R: Why would that bring you to my beloved black hole?
+P: Because there is a chance that there is Antimatter?
+R: NO! There is not!
+P: That doesn't sound convincing!
+R: You! You shall not pass!
+P: Pfff. We're so getting copyright striked.
+R: Prepare, for here I come!
+P: ...
+
+==== fight ====
+
+==== you lose ====
+R: Come back when you're stronger, kiddo
+P: ...!
+F: I can't believe you'd fumble it like that.
+
+==== you win ====
+R: I... I can't believe I lost...
+P: Happens to the best of us. Don't sweat it.
+R: What are you going to do with my black hole now? (much sad)
+P: I'll just check if you got what we want. I'll be gone in the blink of an eye.
+R: Can I come with you?
+P: What...? Why?
+R: Can't I?
+P: Fine...
+F: Hey. I got something to say to that too!
+P: No you don't.
+R: Yay.
+---- Encounter with Ruru end ----
+
+--- イントロ ---
+
+F: やっと目を覚まされましたか。任務がございます。いつまで死んだふりをなさるおつもりですか。
+P: ...
+F: 何か？
+P: 君は...誰？
+F: まったく...頭を強く打たれたのですか？はぁ...私はフロ。案内役です、一応。
+P: 案内役？
+F: 本当に覚えていないのですね...私たちは、全宇宙の支配者、偉大なる銀河皇帝ミスター・オレンジ様から特別な任務を受けております。アンチマターを探し出し、選ばれし者が宇宙の果てまで影響力を広げるためです。
+P: 俺が選ばれたの？
+F: 私たち、です。私も理解できません。あなたのような愚か者と、私のような天才が...？
+P: おい...
+F: さて、記憶がないなら、ブリッジをご案内しましょう。現在、あなたは神聖帝国の宇宙ステーションにいます。ここは「ブリッジ」と呼ばれる制御室で、これからの作戦拠点となります。
+アンチマターを見つけるためには、近隣の惑星を探索する必要があります。すでに近くにいるはずです。残念ながら、装備は最良とは言えません。（プロット上の理由です）
+P: プロット上の理由...？
+F: ですから、まずは近くの惑星を探索し、装備を何とかして強化する方法を見つけるべきです。
+P: スルーの？
+F: こちらのボタンを押してください。周囲の惑星を表示するナビが開きます。
+F: よろしい。次に、惑星の一つにカーソルを合わせてください。基本情報が表示されます。
+F: クリックすると、小型の衛星船を展開し、その惑星を探索して鉱物を採掘できます。ただし、遠方の惑星へ向かう途中で、予期せぬ事態に遭遇する可能性があります...
+P: 予期せぬ事態？
+F: とにかく、試してみてください。
+P: だから無視すんなって
+P: これが予期せぬ事態ってやつか...
+F: ええ（喜びを抑えきれない小声で）
+P: 嬉しそうじゃないか、おい。
+F: 何のことか存じません、虫けら。できるものなら、倒してみなさい...
+P: ...
+F: ちっ...
+P: 今、生き延びたことに舌打ちした？したよな？
+F: 目的地に到着しました。さあ、任務を遂行してください。
+F: さて、今回はここまでにしましょう。ステーションに戻り、採掘した資源を保管します。
+F: よ...よくやりました...（渋々）
+F: 素晴らしいですね。全ての鉱石を無駄なアップグレードに使ってしまうとは。
+P: ...
+F: ステーションには、ナマゾンにアクセスできるボードコンピューターもあります。最近では、宇宙の果てでも迅速に配達してくれます。ロープでも注文してみては？
+P: なんでそんなに嫌われてるの...？
+F: え？私があなたを嫌っているように見えますか？それは（全く）意図しておりません。
+F: ああ、そういえば言い忘れていましたわね。お疲れでしたら……あるいは、そのロープでもお使いになりたいのなら、ご自分の私室をご利用なさってくださいませ、殿方。
+
+--- アンチマター発見 ---
+F: ようやくですね。時間がかかりすぎました。ミスター・オレンジ様に何と報告すればよいのでしょうか？
+P: 本当にかわらないな、君は...
+
+--- アイスクリーム発見 ---
+F: ...！あ、あ、アイスクリーム...！
+P: ...
+F: 別に、欲しいわけじゃないんだから！
+P: そうか。じゃあ帰ろうか。役に立ちそうにないし。
+F: でも、害にはならないでしょう？
+P: へへ。
+F: むぅ！
+
+--- エキゾチックマター発見 ---
+F: ふむ。これはかなり...エキゾチックですね。
+P: はぁ。
+F: 何よ。
+
+--- ルルとの遭遇 ---
+R: あ、あなたは誰ですか！
+P: 俺は...通りすがりの勇者？
+R: 勇者！？勇者が宇宙の果てに来るわけないです！
+R: それ、説得力ないです！ここで何してるんですか？
+P: 周辺の惑星でアンチマターを探しています。
+R: なんでそれが、私の大切なブラックホールに来る理由になるんですか？
+P: アンチマターがある可能性があるから？
+R: ないです！絶対に！
+P: それ、説得力ないな。
+R: あなた！ここを通さないです！
+P: ぷっ。著作権で訴えられそう。
+R: 覚悟するです！行きますよ！
+P: ...
+
+==== 敗北時 ====
+R: もっと強くなってから来るです、坊や。
+P: ...！
+F: そんな簡単に倒されるとは、信じられません。
+
+==== 勝利時 ====
+R: わ、私が負けるなんて...
+P: 誰にでもあることさ。気にするな。
+R: 私のブラックホール、どうするつもりですか？（しょんぼり）
+P: 欲しいものがあるか確認するだけだよ。すぐに立ち去るさ。
+R: 私も一緒に行っていいですか？
+P: えっ...なんで？
+R: ダメですか？
+P: わかったよ...
+F: ちょっと、私にも発言権があるんですけど！
+P: ないよ。
+R: やった〜！
