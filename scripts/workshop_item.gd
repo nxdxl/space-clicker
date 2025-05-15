@@ -45,6 +45,18 @@ func _not_spoon_or_shield() -> bool:
 
 func _on_upgrade_button_pressed(item_data: ItemData) -> void:
 	Item.upgrade(item_data)
+	
+	# THIS IS THE UPGRADED STATE #
+	# -------------------------- #
+	#        ACHIEVEMENTS        #
+	# -------------------------- #
+	
+	if (item_data.item_type == Item.ItemName.ENGINE) and (item_data.level == 2):
+		Player.achieve(Achievements.Achievement.AN_EVEN_BETTER_ENGINE)
+		
+	if (item_data.item_type == Item.ItemName.ENGINE) and (item_data.level == 3):
+		Player.achieve(Achievements.Achievement.THE_BEST_ENGINE)
+	
 	AudioPlayer.play_sound(AudioPlayer.Sound.UPGRADE)
 	emit_signal("item_upgraded")
 	emit_signal("refresh_workshop")

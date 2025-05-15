@@ -42,17 +42,20 @@ func _show_popup_text(text: String):
 
 
 func _on_click() -> void:
-	_show_popup_text("%s" % Player.damage)
 	current_health -= Player.damage
-	emit_signal("notify_healthbar", current_health)
 	if current_health <= 0 and not dead:
 		dead = true
 		emit_signal("kill_bgm")
 		_defeat_enemy()
+	
+	emit_signal("notify_healthbar", current_health)
+	if not dead:
+		Player.add_click()
+		_show_popup_text("%s" % Player.damage)
 
 
 func _defeat_enemy() -> void:
-	Player.space_dollars += space_dollars
+	Player.add_space_dollars(space_dollars)
 	EXPLOOOOOOSIOOOOOON.visible = true
 	EXPLOOOOOOSIOOOOOON.play("main_animation")
 	audio.play()
