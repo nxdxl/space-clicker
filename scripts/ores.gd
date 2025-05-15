@@ -124,6 +124,7 @@ func _show_popup_text(text: String):
 
 
 func _on_click():
+	Player.add_click()
 	current_health -= Player.damage
 	emit_signal("notify_healthbar", current_health)
 	print("%s clicked. Health: %d" % [ore_type_to_name[ore_type], current_health])
@@ -148,6 +149,8 @@ func _mine_ore():
 	
 	if !Player.checkpoints["exotic_matter"] and ore_type == Globals.PlanetName.EXOTIC_MATTER:
 		Dialogic.start("furo_exotic_matter")
+		# this is so stupid. you HAVE to pass all args, even if they're kwargs??
+		Player.achieve(Achievements.Achievement.DUMMY, Achievements.HiddenAchievement.VERY_EXOTIC)
 		Player.checkpoints["exotic_matter"] = true
 		
 	if !Player.checkpoints["anti_matter"] and ore_type == Globals.PlanetName.ANTIMATTER:

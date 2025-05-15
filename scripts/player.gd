@@ -1,6 +1,5 @@
 extends Node
 
-const Globals = preload("res://scripts/globals.gd")
 const SAVE_PATH = "user://save_data.tres"
 const SaveDataScript = preload("res://scripts/save_data.gd")
 
@@ -11,13 +10,15 @@ var damage: int = 1
 var ore_dictionary: Dictionary = {}
 var item_list: Array[ItemData]
 var shop_items: Array[ItemData]
-# total amount of clicks the player has performed on an ore/enemy
-# why did i just not have time to implement this wtf
+# total enemy / ore clicks
 var total_clicks: int = 0
-var total_time_spent: float = 0
+var total_time_spent: float
 var space_dollars: int = 10
+var total_space_dollars: int = 10
 var session_start_time: float = 0
-var session_save_time: float = 0
+var achievements: Array[Achievements.Achievement]
+var hidden_achievements: Array[Achievements.HiddenAchievement]
+var rank: Ranks.Rank
 
 # these are checks for certain events in the game
 var defeated_ruru = false
@@ -39,10 +40,47 @@ var checkpoints: Dictionary[String, bool] = {
 
 func _ready() -> void:
 	var auto_save_timer := Timer.new()
+	session_start_time = Time.get_unix_time_from_system()
 	auto_save_timer.wait_time = 60  # Save every 60 seconds
 	auto_save_timer.autostart = true
 	auto_save_timer.timeout.connect(_save_state)
 	add_child(auto_save_timer)
+
+
+func achieve(achievement: Achievements.Achievement = Achievements.Achievement.DUMMY, hidden: Achievements.HiddenAchievement = Achievements.HiddenAchievement.DUMMY) -> void:
+	print_debug("Achievement: " % [achievement, hidden])
+	if achievement != Achievements.Achievement.DUMMY:
+		achievements.append(achievement)
+	if hidden != Achievements.HiddenAchievement.DUMMY:
+		hidden_achievements.append(hidden)
+	# play animation
+	# play a sound maybe?
+
+
+func has_achieved(achievement: Achievements.Achievement = Achievements.Achievement.DUMMY, hidden: Achievements.HiddenAchievement = Achievements.HiddenAchievement.DUMMY) -> bool:
+	# check if player has achieved a certain achievement
+	if achievement != Achievements.Achievement.DUMMY:
+		return achievement in achievements
+	return hidden in hidden_achievements
+
+
+func add_space_dollars(amount: int) -> void:
+	Player.space_dollars += amount
+	Player.total_space_dollars += amount
+	
+	for achvmnt in Achievements.req_space_dollars.keys():
+		if Player.total_space_dollars >= Achievements.req_space_dollars[achvmnt]:
+			Player.achieve(achvmnt)
+
+
+func add_click() -> void:
+	Player.total_clicks += 1
+	
+	# so we don't check for the achievement every single click
+	if Player.total_clicks % 100 == 0:
+		for achvmnt in Achievements.req_clicks.keys():
+			if Player.total_clicks >= Achievements.req_clicks[achvmnt]:
+				Player.achieve(achvmnt)
 
 
 func _save_state() -> void:
@@ -57,11 +95,17 @@ func _save_state() -> void:
 		save_data.item_list.append(item)
 	for item in shop_items:
 		save_data.shop_items.append(item)
+	for achievement in achievements:
+		save_data.achievements.append(achievement)
+	for hidden in hidden_achievements:
+		save_data.hidden_achievements.append(hidden)
 	save_data.total_clicks = total_clicks
-	save_data.total_time_spent = total_time_spent
 	save_data.space_dollars = space_dollars
 	save_data.checkpoints = checkpoints
 	save_data.defeated_ruru = defeated_ruru
+	total_time_spent += (Time.get_unix_time_from_system() - session_start_time)
+	save_data.total_time_spent = total_time_spent
+	save_data.total_space_dollars = total_space_dollars
 
 	var err = ResourceSaver.save(save_data, SAVE_PATH)
 	if err == OK:
@@ -84,11 +128,16 @@ func _load_state() -> int:
 			item_list.append(item)
 		for item in loaded.shop_items:
 			shop_items.append(item)
+		for achievement in loaded.achievements:
+			achievements.append(achievement)
+		for hidden in loaded.hidden_achievements:
+			hidden_achievements.append(hidden)
 		total_clicks = loaded.total_clicks
 		total_time_spent = loaded.total_time_spent
 		space_dollars = loaded.space_dollars
 		checkpoints = loaded.checkpoints
 		defeated_ruru = loaded.defeated_ruru
+		total_space_dollars = loaded.total_space_dollars
 		print("Game loaded.")
 		return 0
 	else:

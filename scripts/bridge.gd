@@ -102,6 +102,7 @@ func _ready():
 		Dialogic.start("intro_one")
 		Player.checkpoints["intro_one"] = true
 		Dialogic.timeline_ended.connect(show_navi_button_popup)
+		Player.achieve(Achievements.Achievement.MEET_FURO)
 		
 	if !Player.checkpoints["intro_seven"] and Player.checkpoints["intro_six"]:
 		Dialogic.start("intro_seven")
@@ -219,6 +220,7 @@ func _redraw_workshop_items(container: HFlowContainer):
 		Dialogic.timeline_ended.disconnect(show_upgrade_popup)
 		Dialogic.start("intro_eight")
 		Player.checkpoints["intro_eight"] = true
+		Player.achieve(Achievements.Achievement.USELESS_UPGRADE)
 
 
 func _add_player_items(scene_name: String) -> void:
