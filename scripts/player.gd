@@ -18,7 +18,7 @@ var total_space_dollars: int = 10
 var session_start_time: float = 0
 var achievements: Array[Achievements.Achievement]
 var hidden_achievements: Array[Achievements.HiddenAchievement]
-var rank: Ranks.Rank
+var rank: Ranks.Rank = -1
 
 # these are checks for certain events in the game
 var defeated_ruru = false
@@ -48,9 +48,10 @@ func _ready() -> void:
 
 
 func achieve(achievement: Achievements.Achievement = Achievements.Achievement.DUMMY, hidden: Achievements.HiddenAchievement = Achievements.HiddenAchievement.DUMMY) -> void:
-	print_debug("Achievement: " % [achievement, hidden])
 	if achievement != Achievements.Achievement.DUMMY:
 		achievements.append(achievement)
+		# since we only go off of achievements for the ranks, this is fine
+		check_and_do_rank_upgrade()
 	if hidden != Achievements.HiddenAchievement.DUMMY:
 		hidden_achievements.append(hidden)
 	# play animation
@@ -62,6 +63,11 @@ func has_achieved(achievement: Achievements.Achievement = Achievements.Achieveme
 	if achievement != Achievements.Achievement.DUMMY:
 		return achievement in achievements
 	return hidden in hidden_achievements
+
+
+func check_and_do_rank_upgrade() -> void:
+	if Ranks.check_rank_reqs(Player.rank + 1):
+		Player.rank += 1
 
 
 func add_space_dollars(amount: int) -> void:
@@ -106,6 +112,7 @@ func _save_state() -> void:
 	total_time_spent += (Time.get_unix_time_from_system() - session_start_time)
 	save_data.total_time_spent = total_time_spent
 	save_data.total_space_dollars = total_space_dollars
+	save_data.rank = rank
 
 	var err = ResourceSaver.save(save_data, SAVE_PATH)
 	if err == OK:
@@ -138,6 +145,7 @@ func _load_state() -> int:
 		checkpoints = loaded.checkpoints
 		defeated_ruru = loaded.defeated_ruru
 		total_space_dollars = loaded.total_space_dollars
+		rank = loaded.rank
 		print("Game loaded.")
 		return 0
 	else:

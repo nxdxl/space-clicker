@@ -15,3 +15,4 @@ class_name SaveData
 @export var achievements: Array[Achievements.Achievement]
 @export var total_space_dollars: int = 0
 @export var hidden_achievements: Array[Achievements.HiddenAchievement]
+@export var rank: Ranks.Rank
