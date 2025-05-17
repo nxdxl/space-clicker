@@ -3,6 +3,8 @@ extends Node
 const SAVE_PATH = "user://save_data.tres"
 const SaveDataScript = preload("res://scripts/save_data.gd")
 
+var player_name: String = "Player Name"
+var max_health: int = 10
 var health: int = 10
 var damage: int = 1
 # since you can't export Dict[type, type], gotta keep this loosely
@@ -11,10 +13,10 @@ var ore_dictionary: Dictionary = {}
 var item_list: Array[ItemData]
 var shop_items: Array[ItemData]
 # total enemy / ore clicks
-var total_clicks: int = 0
+var total_clicks: int
 var total_time_spent: float
 var space_dollars: int = 10
-var total_space_dollars: int = 10
+var total_space_dollars: int
 var session_start_time: float = 0
 var achievements: Array[Achievements.Achievement]
 var hidden_achievements: Array[Achievements.HiddenAchievement]
@@ -44,7 +46,7 @@ func _ready() -> void:
 	auto_save_timer.wait_time = 60  # Save every 60 seconds
 	auto_save_timer.autostart = true
 	auto_save_timer.timeout.connect(_save_state)
-	add_child(auto_save_timer)
+	#add_child(auto_save_timer)
 
 
 func achieve(achievement: Achievements.Achievement = Achievements.Achievement.DUMMY, hidden: Achievements.HiddenAchievement = Achievements.HiddenAchievement.DUMMY) -> void:
@@ -54,7 +56,9 @@ func achieve(achievement: Achievements.Achievement = Achievements.Achievement.DU
 		check_and_do_rank_upgrade()
 	if hidden != Achievements.HiddenAchievement.DUMMY:
 		hidden_achievements.append(hidden)
-	# play animation
+	# would have loved to put await Dialogic.timeline_ended here,
+	# but we sometimes arrive quicker than Dialogic starts the timeline
+	UI.notify(Achievements.achievement_image, "New Achievement Unlocked", Achievements.achievement_names[achievement])
 	# play a sound maybe?
 
 
@@ -66,8 +70,14 @@ func has_achieved(achievement: Achievements.Achievement = Achievements.Achieveme
 
 
 func check_and_do_rank_upgrade() -> void:
-	if Ranks.check_rank_reqs(Player.rank + 1):
+	# i do this, so that it checks if we achieve multiple ranks at once
+	# should only happen in god mode tho
+	print_debug("Check and do rank upgrades")
+	while Ranks.check_rank_reqs(Player.rank + 1):
+		print_debug("Actually checking for ", Player.rank)
 		Player.rank += 1
+		UI.notify(Ranks.rank_images[Player.rank], "New Rank Unlocked", Ranks.rank_names[Player.rank])
+		UI.refresh_player_rank()
 
 
 func add_space_dollars(amount: int) -> void:
@@ -75,25 +85,39 @@ func add_space_dollars(amount: int) -> void:
 	Player.total_space_dollars += amount
 	
 	for achvmnt in Achievements.req_space_dollars.keys():
-		if Player.total_space_dollars >= Achievements.req_space_dollars[achvmnt]:
-			Player.achieve(achvmnt)
+		if not achvmnt in Player.achievements:
+			if Player.total_space_dollars >= Achievements.req_space_dollars[achvmnt]:
+				Player.achieve(achvmnt)
 
 
-func add_click() -> void:
-	Player.total_clicks += 1
+func add_click(clicks: int = 1) -> void:
+	Player.total_clicks += clicks
+	UI.refresh_side_bar()
 	
 	# so we don't check for the achievement every single click
 	if Player.total_clicks % 100 == 0:
-		for achvmnt in Achievements.req_clicks.keys():
+		_check_click_achievement()
+
+
+func _check_click_achievement():
+	for achvmnt in Achievements.req_clicks.keys():
+		if achvmnt not in Player.achievements:
 			if Player.total_clicks >= Achievements.req_clicks[achvmnt]:
 				Player.achieve(achvmnt)
-
 
 func _save_state() -> void:
 	# don't save in the main menu
 	if get_tree().current_scene.name == "MainMenu":
 		return
+	if (total_time_spent >= 60 * 10) and not (Achievements.Achievement.NEWCOMER in Player.achievements):
+		achieve(Achievements.Achievement.NEWCOMER)
+	if (total_time_spent >= 60 * 60) and not (Achievements.Achievement.KNOWN in Player.achievements):
+		achieve(Achievements.Achievement.KNOWN)
+	if (total_time_spent >= 60 * 600) and not (Achievements.Achievement.HOW in Player.achievements):
+		achieve(Achievements.Achievement.HOW)
 	var save_data := SaveDataScript.new()
+	save_data.player_name = player_name
+	save_data.max_health = max_health
 	save_data.health = health
 	save_data.damage = damage
 	save_data.ore_dictionary = ore_dictionary
@@ -128,6 +152,8 @@ func _load_state() -> int:
 	
 	var loaded = ResourceLoader.load(SAVE_PATH) as SaveDataScript
 	if loaded:
+		player_name = loaded.player_name
+		max_health = loaded.max_health
 		health = loaded.health
 		damage = loaded.damage
 		ore_dictionary = loaded.ore_dictionary

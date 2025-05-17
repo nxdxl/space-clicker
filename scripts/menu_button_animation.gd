@@ -14,9 +14,13 @@ func _ready():
 
 func _on_mouse_entered():
 	var tween = create_tween()
+	pivot_offset = Vector2(size.x * 0.5, size.y * 0.5)
+	z_index += 100
 	tween.tween_property(self, "scale", base_scale * HOVER_SCALE, SCALE_TIME).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 
 
 func _on_mouse_exited():
 	var tween = create_tween()
+	pivot_offset = Vector2(size.x * 0.5, size.y * 0.5)
+	z_index -= 100
 	tween.tween_property(self, "scale", base_scale, SCALE_TIME).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)

@@ -1,7 +1,6 @@
 extends Control
 
 signal item_purchased
-signal refresh_namazon
 
 @onready var item_image = $%ItemImage
 @onready var gold_coin_animation = $%GoldCoinAnimation
@@ -12,9 +11,12 @@ var item: ItemData
 
 
 func _ready() -> void:
+	if not item:
+		return
 	item_name_label.text = item.item_name
 	item_image.texture = item.texture
 	gold_coin_animation.play("main_animation")
+	purchase_button.text = str(item.price)
 	purchase_button.disabled = !Item.is_purchaseable(item)
 	if item.purchased:
 		purchase_button.disabled = true
@@ -51,7 +53,7 @@ func _on_purchase_button_pressed() -> void:
 	if nr_purchased_items.size() == Player.item_list.size() - 1:
 		Player.achieve(Achievements.Achievement.COLLECTOR)
 	emit_signal("item_purchased")
-	emit_signal("refresh_namazon")
+	UI.refresh_side_bar()
 
 
 func _handle_shield_purchase():

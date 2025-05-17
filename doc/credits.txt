@@ -18,3 +18,4 @@ Ice Cream (without the halo effect): https://dragonember.itch.io/icecream
 Enemy-artwork: RPG Maker MV Battle Girl characters Pack 1
 Music and Sound: RPG Maker MV (Yes, I somehow own them all)
 Gold Coin: https://jordon-games.itch.io/animated-gold-coin
+Achievement Icon: https://fonts.google.com/icons?selected=Material+Symbols+Outlined:workspace_premium:FILL@0;wght@400;GRAD@0;opsz@48&icon.query=achievement&icon.size=100&icon.color=%2300000

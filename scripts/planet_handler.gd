@@ -18,6 +18,8 @@ func init(target_planet: Globals.PlanetName) -> void:
 
 
 func _ready() -> void:
+	UI.last_scene = "res://scenes/navi.tscn"
+	UI.modular_back_button.text = "NAVI"
 	screen_size = get_viewport_rect().size
 	center.add_child(ore_instance)
 	ore_instance.set_stats(planet)
@@ -41,6 +43,7 @@ func _ready() -> void:
 func _initiate_healthbar(health_bar_bar: TextureProgressBar):
 	ore_instance.connect("notify_healthbar", Callable(self, "_on_notify_healthbar"))
 	ore_instance.connect("enemy_dead", Callable(self, "_enemy_dead"))
+	health_bar.visible = true
 	health_bar_bar.size = Vector2(screen_size.x * 0.1, 64)
 	health_bar_bar.pivot_offset = Vector2(health_bar_bar.size.x * 0.5, health_bar_bar.size.y * 0.5)
 	health_bar_bar.position = screen_size * 0.5 - Vector2(health_bar_bar.size.x * 0.5, screen_size.y * 0.3)
@@ -76,7 +79,3 @@ func _ruru_timeline_defeated() -> void:
 
 func _on_notify_healthbar(new_health: float) -> void:
 	health_bar.value = new_health
-
-
-func _on_button_pressed() -> void:
-	SceneSwitcher.switch_scene("res://scenes/navi.tscn")

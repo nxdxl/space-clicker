@@ -106,8 +106,6 @@ func set_stats(this_ore_type: Globals.PlanetName) -> void:
 	reward_amount = reward_by_type[this_ore_type]
 	price = price_by_type[this_ore_type]
 	sprite.texture = ore_textures[this_ore_type]
-	
-	print_debug("health %s, health %s, type %s, reward %s, price %s" % [max_health, current_health, ore_type, reward_amount, price])
 
 
 func _on_input_event(_viewport, event, _shape_idx):

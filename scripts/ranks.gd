@@ -9,9 +9,7 @@ enum Rank {
 	PLATINUM,
 }
 
-
 var rank_reqs: Dictionary[Rank, Array] = {
-	# all achievement reqs are incremental, so i don't need to check prior ones
 	Rank.LEAF: [Achievements.Achievement.MEET_FURO],
 	Rank.TWIG: [Achievements.Achievement.USELESS_UPGRADE, Achievements.Achievement.NEWCOMER, Achievements.Achievement.CLICKING_IS_FUN],
 	Rank.SILVER: [Achievements.Achievement.RICH_KID, Achievements.Achievement.HERE_COMES_THE_AIRPLANE],
@@ -29,7 +27,24 @@ var rank_images: Dictionary[Rank, Texture2D] = {
 	Rank.PLATINUM: preload("res://img/ranks/platinum.png"),
 }
 
+var rank_names: Dictionary[Rank, String] = {
+	Rank.LEAF: "Leaf",
+	Rank.TWIG: "Twig",
+	Rank.SILVER: "Silver",
+	Rank.GOLD: "Gold",
+	Rank.DIAMOND: "Diamond",
+	Rank.PLATINUM: "Platinum",
+}
+
 
 func check_rank_reqs(rank: Rank) -> bool:
-	# very fancy -- basically checking if list1 is a subset of list2
-	return rank_reqs[rank].all(func(x): return x in Player.achievements)
+	# lazy way of checking if the player is at max rank
+	print_debug("Checking rank reqs for ", rank, " Player rank ", Player.rank)
+	print_debug(Player.achievements)
+	if rank >= rank_reqs.size():
+		return false
+	for chvmnt in rank_reqs[rank]:
+		print_debug("Checking achievement ", chvmnt)
+		if chvmnt not in Player.achievements:
+			return false
+	return true

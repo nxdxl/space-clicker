@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://wqql5u3r1mwy"
-path="res://.godot/imported/workshop_menu_button.png-85eb8a61061a9adec37022b724029b54.ctex"
+uid="uid://c61q7x1reeguc"
+path="res://.godot/imported/IMG_8530.jpg-a7b5b977277e763e92715fc104909ed7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://img/ui/bridge/workshop_menu_button.png"
-dest_files=["res://.godot/imported/workshop_menu_button.png-85eb8a61061a9adec37022b724029b54.ctex"]
+source_file="res://img/ranks/IMG_8530.jpg"
+dest_files=["res://.godot/imported/IMG_8530.jpg-a7b5b977277e763e92715fc104909ed7.ctex"]
 
 [params]
 

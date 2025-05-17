@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ckj37757hcuik"
-path="res://.godot/imported/namazon_menu_button.png-4e7fee51db0303cb99e5f5e7ab7d9add.ctex"
+uid="uid://da6qk0nxqjfb1"
+path="res://.godot/imported/IMG_8529.jpg-76b20391276ef75e45439ef9b93b58d2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://img/ui/bridge/namazon_menu_button.png"
-dest_files=["res://.godot/imported/namazon_menu_button.png-4e7fee51db0303cb99e5f5e7ab7d9add.ctex"]
+source_file="res://img/ranks/IMG_8529.jpg"
+dest_files=["res://.godot/imported/IMG_8529.jpg-76b20391276ef75e45439ef9b93b58d2.ctex"]
 
 [params]
 

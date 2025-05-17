@@ -18,6 +18,9 @@ func init(planet) -> void:
 
 
 func _ready() -> void:
+	UI.last_scene = "res://scenes/navi.tscn"
+	UI.modular_back_button.text = "FLEE"
+	
 	screen_size = get_viewport_rect().size
 	center.add_child(enemy_instance)
 	enemy_instance.connect("create_ruru", Callable(_handle_ruru_creation))
@@ -47,6 +50,7 @@ func handle_enemy_info() -> void:
 func _initiate_healthbar(health_bar_bar: TextureProgressBar):
 	enemy_instance.connect("notify_healthbar", Callable(self, "_on_notify_healthbar"))
 	enemy_instance.connect("enemy_dead", Callable(self, "_enemy_dead"))
+	health_bar.visible = true
 	health_bar_bar.size = Vector2(screen_size.x * 0.1, 64)
 	health_bar_bar.pivot_offset = Vector2(health_bar_bar.size.x * 0.5, health_bar_bar.size.y * 0.5)
 	health_bar_bar.position = screen_size * 0.5 - Vector2(health_bar_bar.size.x * 0.5, screen_size.y * 0.3)
@@ -56,6 +60,7 @@ func _initiate_healthbar(health_bar_bar: TextureProgressBar):
 
 func _enemy_dead() -> void:
 	health_bar.visible = false
+	UI.refresh_side_bar()
 	if !Player.checkpoints["intro_four"]:
 		Dialogic.start("intro_four")
 		Player.checkpoints["intro_four"] = true

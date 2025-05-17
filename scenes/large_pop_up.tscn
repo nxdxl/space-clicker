@@ -1,0 +1,147 @@
+[gd_scene load_steps=11 format=3 uid="uid://j0kwm5om6l7f"]
+
+[ext_resource type="Script" uid="uid://o64m36jeuhs2" path="res://scripts/large_pop_up.gd" id="1_36d8c"]
+[ext_resource type="StyleBox" uid="uid://l7ml62qm5sdc" path="res://tres/presets/button_style.tres" id="2_36d8c"]
+[ext_resource type="StyleBox" uid="uid://vplgq7bjvkbg" path="res://tres/presets/button_disabled.tres" id="3_x3hai"]
+[ext_resource type="Script" uid="uid://oj172dymblsc" path="res://scripts/button_animation.gd" id="4_140rj"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x4jx1"]
+bg_color = Color(0.654902, 0.756863, 0.952941, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+shadow_size = 10
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kupmu"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_8erbt"]
+load_path = "res://.godot/imported/namazon_menu_button.png-4e7fee51db0303cb99e5f5e7ab7d9add.ctex"
+
+[sub_resource type="Animation" id="Animation_36d8c"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_hhnsb"]
+resource_name = "main_animation"
+length = 0.1667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.166667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_x3hai"]
+_data = {
+&"RESET": SubResource("Animation_36d8c"),
+&"main_animation": SubResource("Animation_hhnsb")
+}
+
+[node name="LargePopUp" type="Panel"]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -574.0
+offset_top = -320.0
+offset_right = 574.0
+offset_bottom = 478.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(574, 385)
+theme_override_styles/panel = SubResource("StyleBoxFlat_x4jx1")
+script = ExtResource("1_36d8c")
+
+[node name="IconHolder" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 11.0
+offset_top = 11.0
+offset_right = 139.0
+offset_bottom = 139.0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_kupmu")
+
+[node name="LargePopUpIcon" type="TextureRect" parent="IconHolder"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -59.0
+offset_top = -59.0
+offset_right = 59.0
+offset_bottom = 59.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("CompressedTexture2D_8erbt")
+expand_mode = 1
+
+[node name="LargePopUpTitle" type="RichTextLabel" parent="."]
+clip_contents = false
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -163.0
+offset_top = 11.0
+offset_right = 163.0
+offset_bottom = 139.0
+grow_horizontal = 2
+theme_override_constants/outline_size = 20
+theme_override_font_sizes/normal_font_size = 50
+text = "WORKSHOP"
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LargePopUpCloseButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -189.0
+offset_top = 11.0
+offset_right = -11.0
+offset_bottom = 139.0
+grow_horizontal = 0
+theme_override_constants/outline_size = 20
+theme_override_font_sizes/font_size = 50
+theme_override_styles/focus = ExtResource("2_36d8c")
+theme_override_styles/disabled = ExtResource("3_x3hai")
+theme_override_styles/hover = ExtResource("2_36d8c")
+theme_override_styles/pressed = ExtResource("2_36d8c")
+theme_override_styles/normal = ExtResource("2_36d8c")
+text = "CLOSE"
+script = ExtResource("4_140rj")
+
+[node name="LargePopUpAnimation" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_x3hai")
+}
+
+[connection signal="pressed" from="LargePopUpCloseButton" to="." method="_on_large_pop_up_close_button_pressed"]

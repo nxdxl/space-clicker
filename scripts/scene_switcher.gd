@@ -23,3 +23,11 @@ func _deferred_switch_scene(res_path: String, data):
 	
 	get_tree().root.add_child(current_scene)
 	get_tree().current_scene = current_scene
+	if current_scene.name == "Navi":
+		# i couldn't get this to work otherwise
+		UI._hide_ui()
+		UI.modular_back_button.visible = true
+	elif current_scene.name == "MainMenu":
+		UI._hide_ui()
+	else:
+		UI._show_ui()

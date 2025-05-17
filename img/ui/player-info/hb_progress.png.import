@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ctepwj4d7ghn4"
-path="res://.godot/imported/navi_menu_button.png-f70215504add21ea78cfeebbc37dc8e6.ctex"
+uid="uid://chb4wh4extisu"
+path="res://.godot/imported/hb_progress.png-82cf83b63d5ceccb3886fdff00d3c394.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://img/ui/bridge/navi_menu_button.png"
-dest_files=["res://.godot/imported/navi_menu_button.png-f70215504add21ea78cfeebbc37dc8e6.ctex"]
+source_file="res://img/ui/player-info/hb_progress.png"
+dest_files=["res://.godot/imported/hb_progress.png-82cf83b63d5ceccb3886fdff00d3c394.ctex"]
 
 [params]
 
