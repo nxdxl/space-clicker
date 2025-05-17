@@ -45,7 +45,7 @@ func _not_spoon_or_shield() -> bool:
 
 func _on_upgrade_button_pressed(item_data: ItemData) -> void:
 	Item.upgrade(item_data)
-	
+	UI.refresh_side_bar()
 	# THIS IS THE UPGRADED STATE #
 	# -------------------------- #
 	#        ACHIEVEMENTS        #

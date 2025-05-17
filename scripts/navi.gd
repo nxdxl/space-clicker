@@ -8,6 +8,8 @@ var rotating = false
 
 
 func _ready():
+	UI.last_scene = "res://scenes/bridge.tscn"
+	UI.modular_back_button.text = "BRIDGE"
 	var screen_size = get_viewport_rect().size
 	
 	# instantiate planets
@@ -53,6 +55,8 @@ func _ready():
 	if !Player.checkpoints["intro_two"]:
 		Dialogic.start("intro_two")
 		Player.checkpoints["intro_two"] = true
+	
+	UI._hide_ui()
 
 
 func planet_available(planet: Globals.PlanetName) -> bool:
@@ -82,10 +86,6 @@ func get_planet_scale(type: Globals.PlanetType) -> float:
 	if type == Globals.PlanetType.PLANET:
 		return 1.0
 	return 1.5
-
-
-func _on_navi_back_to_menu_button_pressed() -> void:
-	SceneSwitcher.switch_scene("res://scenes/bridge.tscn")
 
 
 func _start_animation(planet_name: Globals.PlanetName) -> void:
@@ -118,7 +118,7 @@ func _on_planet_input_event(_viewport, event, _shape_idx, planet: Globals.Planet
 			for req in reqs:
 				for itm in Globals.planet_requirements[planet]:
 					req_string = Item.item_names[itm][Globals.planet_requirements[planet][itm]] + ", "
-			InfoPopupManager.show_warning("This planet isn't available yet. \nRequirements: %s" % req_string.substr(0, req_string.length() - 2))
+			UI.warning_notification("You can't go there yet")
 			return
 		AudioPlayer.play_sound(AudioPlayer.Sound.BUTTON_CLICK)
 		SceneSwitcher.switch_scene("res://scenes/fight_scene.tscn", planet)

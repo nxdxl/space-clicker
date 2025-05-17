@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://dlx0kecax6exi"]
+
+[ext_resource type="StyleBox" uid="uid://68unjfvwumgm" path="res://tres/ui/tab_container_style.tres" id="1_ku2ru"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8k7j3"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_catpy"]
+
+[node name="LargePopUpTabContainer" type="TabContainer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -563.0
+offset_top = -245.0
+offset_right = 563.0
+offset_bottom = 375.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/outline_size = 10
+theme_override_constants/side_margin = 0
+theme_override_font_sizes/font_size = 30
+theme_override_styles/tab_focus = SubResource("StyleBoxEmpty_8k7j3")
+theme_override_styles/tab_disabled = ExtResource("1_ku2ru")
+theme_override_styles/panel = SubResource("StyleBoxEmpty_catpy")
+theme_override_styles/tab_selected = ExtResource("1_ku2ru")
+theme_override_styles/tab_hovered = ExtResource("1_ku2ru")
+theme_override_styles/tab_unselected = ExtResource("1_ku2ru")

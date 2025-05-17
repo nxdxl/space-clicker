@@ -41,11 +41,11 @@ static var item_names = {
 }
 
 static var item_prices = {
-	ItemName.PICKAXE: 10,
-	ItemName.METEORITE_SHIELD: 100,
+	ItemName.PICKAXE: 100,
+	ItemName.METEORITE_SHIELD: 500,
 	ItemName.ENGINE: 10,
-	ItemName.BUCKET: 1000,
-	ItemName.MAGMA_SPOON: 1000
+	ItemName.BUCKET: 2500,
+	ItemName.MAGMA_SPOON: 5000
 }
 
 static var item_upgrade_materials = {

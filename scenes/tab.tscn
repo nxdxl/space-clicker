@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://wsxiu0x5biya"]
+
+[node name="Tab" type="MarginContainer"]
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 100
+metadata/_tab_index = 0
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+layout_mode = 2
+
+[node name="FlowContainer" type="HFlowContainer" parent="ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/h_separation = 310
+theme_override_constants/v_separation = 310
