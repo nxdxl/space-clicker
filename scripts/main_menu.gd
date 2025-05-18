@@ -43,7 +43,7 @@ func _on_new_game_button_pressed() -> void:
 	await music_animation.animation_finished
 	name_animation.play("main_animation")
 	input_panel.visible = true
-	
+
 
 func _open_next() -> void:
 	if counter < messages.size():
