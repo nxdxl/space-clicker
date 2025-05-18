@@ -15,7 +15,7 @@ var rank_reqs: Dictionary[Rank, Array] = {
 	Rank.SILVER: [Achievements.Achievement.RICH_KID, Achievements.Achievement.HERE_COMES_THE_AIRPLANE],
 	Rank.GOLD: [Achievements.Achievement.THE_BEST_ENGINE, Achievements.Achievement.COLLECTOR],
 	Rank.DIAMOND: [Achievements.Achievement.WEALTHY, Achievements.Achievement.ON_FIRE, Achievements.Achievement.KNOWN],
-	Rank.PLATINUM: [Achievements.Achievement.MY_FINGER_IS_TIRED, Achievements.Achievement.HOW],
+	Rank.PLATINUM: [Achievements.Achievement.MY_FINGER_IS_TIRED, Achievements.Achievement.HOW, Achievements.Achievement.THE_FALLEN_ANGEL],
 }
 
 var rank_images: Dictionary[Rank, Texture2D] = {

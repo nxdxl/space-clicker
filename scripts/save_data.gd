@@ -2,6 +2,8 @@ extends Resource
 class_name SaveData
 
 @export var player_name: String
+@export var player_title: String
+@export var available_titles: Array[Titles.Title]
 @export var max_health: int
 @export var health: int
 @export var damage: int

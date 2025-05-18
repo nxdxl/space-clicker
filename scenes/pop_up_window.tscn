@@ -7,7 +7,6 @@
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2fdt4"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_8erbt"]
-load_path = "res://.godot/imported/namazon_menu_button.png-4e7fee51db0303cb99e5f5e7ab7d9add.ctex"
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2fdt4"]
 bg_color = Color(0.490196, 0.533333, 0.976471, 1)

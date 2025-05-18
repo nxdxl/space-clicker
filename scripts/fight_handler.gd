@@ -71,6 +71,7 @@ func _enemy_dead() -> void:
 	if !Player.defeated_ruru and (target_planet == Globals.PlanetName.ANTIMATTER):
 		Dialogic.start("ruru_player_win")
 		Player.achieve(Achievements.Achievement.THE_FALLEN_ANGEL)
+		Player.unlock_title(Titles.Title.FALLEN_ANGEL_DESTROYER)
 		Player.defeated_ruru = true
 		Dialogic.timeline_ended.connect(_ruru_timeline_defeated)
 		return

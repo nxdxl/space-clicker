@@ -2,12 +2,12 @@ extends Control
 
 signal open_sleep
 
-@onready var title = $%PopUpTitle
-@onready var icon = $%PopUpIcon
-@onready var margin_container = $MarginContainer/MarginContainer
-@onready var vbox = $MarginContainer/MarginContainer/VBoxContainer
-@onready var text_box = $MarginContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer/RichTextLabel
-@onready var hflow_container = $%HFlowContainer
+@onready var title 				= $%PopUpTitle
+@onready var icon 				= $%PopUpIcon
+@onready var margin_container 	= $MarginContainer/MarginContainer
+@onready var vbox 				= $MarginContainer/MarginContainer/VBoxContainer
+@onready var text_box 			= $MarginContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer/RichTextLabel
+@onready var hflow_container 	= $%HFlowContainer
 
 
 func _ready() -> void:
