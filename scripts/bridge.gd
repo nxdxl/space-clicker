@@ -58,7 +58,7 @@ func _ready():
 		
 	UI.visible = true
 	UI.refresh_side_bar()
-	UI.refresh_player_rank()
+	UI.refresh_player()
 
 
 func character_fade_in(image: TextureRect, anim: AnimationPlayer) -> void:
@@ -69,6 +69,7 @@ func character_fade_in(image: TextureRect, anim: AnimationPlayer) -> void:
 func show_navi_button_popup() -> void:
 	InfoPopupManager.show_info("Clicking on the explore button in the middle will take you to the navigation system! Try it out!")
 	Player.achieve(Achievements.Achievement.MEET_FURO)
+	Player.unlock_title(Titles.Title.NOOB)
 
 
 func _open_sleep():

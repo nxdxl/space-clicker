@@ -125,7 +125,6 @@ func _on_click():
 	Player.add_click()
 	current_health -= Player.damage
 	emit_signal("notify_healthbar", current_health)
-	print("%s clicked. Health: %d" % [ore_type_to_name[ore_type], current_health])
 	if current_health <= 0:
 		_mine_ore()
 	else:
@@ -134,7 +133,8 @@ func _on_click():
 
 func _mine_ore():
 	_show_popup_text("Ore mined: %s x%s" % [ore_type_to_name[ore_type], reward_amount])
-	print("Ore mined! (%s)" % ore_type_to_name[ore_type])
+	if ore_type == Globals.PlanetName.ANTIMATTER and not (Titles.Title.MR_ORANGE in Player.available_titles):
+		Player.unlock_title(Titles.Title.MR_ORANGE)
 	if not ore_type in Player.ore_dictionary:
 		Player.ore_dictionary[ore_type] = 0
 	Player.ore_dictionary[ore_type] += reward_amount

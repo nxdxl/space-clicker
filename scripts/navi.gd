@@ -26,7 +26,7 @@ func _ready():
 		instance.connect("mouse_entered", Callable(self, "_on_planet_mouse_entered").bind(planet))
 		instance.connect("mouse_exited", Callable(self, "_on_planet_mouse_exited").bind(planet))
 		instance.connect("input_event", Callable(self, "_on_planet_input_event").bind(planet))
-	
+		
 		# scale all planets
 		var sprite = planet_instances[planet].get_child(0)
 		var base_resolution = 1440
@@ -111,7 +111,9 @@ func _on_planet_mouse_exited(planet: Globals.PlanetName) -> void:
 
 
 func _on_planet_input_event(_viewport, event, _shape_idx, planet: Globals.PlanetName) -> void:
-	if event is InputEventMouseButton and event.pressed:
+	if event is InputEventMouseButton:
+		if not (event.button_index == MOUSE_BUTTON_LEFT and event.pressed):
+			return
 		if !planet_available(planet):
 			var reqs = Globals.planet_requirements[planet]
 			var req_string = ""

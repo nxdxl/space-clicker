@@ -23,10 +23,8 @@ func show_info(text: String):
 
 func _show_popup(mode: Mode, text: String):
 	if popup_instance:
-		print_debug("Instance Exists: ", text)
 		popup_instance.show_popup(mode, text)
 		return
-	print_debug("Instantiating: ", text)
 	popup_instance = popup_scene.instantiate()
 	get_tree().current_scene.add_child(popup_instance)
 	popup_instance.show_popup(mode, text)

@@ -27,6 +27,7 @@ InfoPopupManager="*res://scripts/info_popup_manager.gd"
 Achievements="*res://scripts/achievements.gd"
 Ranks="*res://scripts/ranks.gd"
 UI="*res://scenes/ui.tscn"
+Titles="*res://scripts/titles.gd"
 
 [dialogic]
 

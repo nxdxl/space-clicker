@@ -24,8 +24,8 @@ var popup_open = false
 @onready var upper_label 			= $%UpperLabel
 @onready var lower_label 			= $%LowerLabel
 @onready var notification_animation = $%NotificationAnimation
-var notification_open: bool = false
-var warning: bool = false
+var notification_open: bool 		= false
+var warning: bool 					= false
 
 # ---------- #
 # Namazon UI #
@@ -57,7 +57,7 @@ var workshop_icon_texture			= preload("res://img/ui/bridge/workshop.png")
 # Modular Back Button #
 # ------------------- #
 @onready var modular_back_button	= $UI/ModularBackButton
-var last_scene: String = ""
+var last_scene: String 				= ""
 
 # ------------ #
 # Menu Buttons #
@@ -69,24 +69,27 @@ var last_scene: String = ""
 @onready var workshop_button		= $%WorkshopButton
 @onready var navi_button			= $%NaviButton
 @onready var namazon_button			= $%NamazonButton
-var navi_scene_path: NodePath = "res://scenes/navi.tscn"
+var navi_scene_path: NodePath 		= "res://scenes/navi.tscn"
 
-# -------------------- #
-# Achievements & Ranks #
-# -------------------- #
-@onready var achvmnt_rank_panel = $%AchvmntRankPanel
-@onready var achvmnt_box = $%AchvmntVBox
-@onready var rank_box = $%RankVBox
-@onready var rank_animation_player = $%RankAnimationPlayer
-var hlist_item = preload("res://scenes/h_list_item.tscn")
-var achvmnt_icon = preload("res://img/ranks/achievement.png")
+# ----------------------------- #
+# Achievements & Ranks & Titles #
+# ----------------------------- #
+@onready var achvmnt_rank_panel 	= $%AchvmntRankPanel
+@onready var achvmnt_box 			= $%AchvmntVBox
+@onready var rank_box 				= $%RankVBox
+@onready var title_box				= $%TitleVBox
+@onready var rank_animation_player 	= $%RankAnimationPlayer
+var hlist_item 						= preload("res://scenes/h_list_item.tscn")
+var achvmnt_icon 					= preload("res://img/ranks/achievement.png")
 
 
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("god_mode"):
+		if get_tree().current_scene.name == "MainMenu":
+			return
 		var achvmnt = Achievements.Achievement.GODMODE
 		if not achvmnt in Player.achievements:
-			Player.achieve(Achievements.Achievement.GODMODE)
+			Player.achieve(achvmnt)
 		Player.damage = 10000
 		Player.add_space_dollars(10000000)
 		Player.add_click(10000000)
@@ -154,6 +157,12 @@ func warning_notification(text: String):
 	notify(image, "WARNING!", text)
 
 
+func info_notification(text: String):
+	var image = preload("res://img/ui/popup/info_icon_yellow.png")
+	AudioPlayer.play_sound(AudioPlayer.Sound.BUTTON_CLICK)
+	notify(image, "INFO!", text)
+
+
 func open_workshop() -> void:
 	if popup_open:
 		return
@@ -167,6 +176,8 @@ func open_workshop() -> void:
 
 
 func _prepare_workshop() -> void:
+	if workshop.get_child_count() > 4:
+		return
 	var margin_container: MarginContainer = MarginContainer.new()
 	margin_container.anchor_left = 0
 	margin_container.anchor_top = 0
@@ -292,11 +303,11 @@ func refresh_player() -> void:
 
 
 func refresh_player_title() -> void:
-	player_title.text = "Titles aren't implemented yet."
+	player_title.text = Player.player_title
 
 
 func refresh_player_name() -> void:
-	player_name.text = "PlayerName"
+	player_name.text = Player.player_name
 
 
 func refresh_player_rank() -> void:
@@ -335,6 +346,8 @@ func _on_rank_close_button_pressed() -> void:
 		child.free()
 	for child in rank_box.get_children():
 		child.free()
+	for child in title_box.get_children():
+		child.free()
 	rank_animation_player.play_backwards("main_animation")
 	await rank_animation_player.animation_finished
 	achvmnt_rank_panel.visible = false
@@ -348,6 +361,7 @@ func _open_achievement_ranks() -> void:
 	rank_animation_player.play("main_animation")
 	_add_achievements()
 	_add_ranks()
+	_add_titles()
 
 
 func _add_achievements() -> void:
@@ -363,7 +377,7 @@ func _add_achievements() -> void:
 		achvmnt_box.add_child(item)
 	var item = hlist_item.instantiate()
 	item.icon = null
-	item.text = "And %s remaining hidden achievements!" % (Achievements.HiddenAchievement.size() - 1 - Player.hidden_achievements.size())
+	item.text = " And %s remaining hidden achievements!" % (Achievements.HiddenAchievement.size() - 1 - Player.hidden_achievements.size())
 	achvmnt_box.add_child(item)
 
 
@@ -379,6 +393,18 @@ func _add_ranks() -> void:
 		if key > Player.rank:
 			item.modulate = Color(0.4, 0.4, 0.4, 1)
 		rank_box.add_child(item)
+
+
+func _add_titles() -> void:
+	for title in Titles.Title:
+		var item = hlist_item.instantiate()
+		var key = Titles.Title.get(title)
+		item.icon = null
+		item.text = Titles.title_names[key] + "\n" + Titles.title_descriptions[key]
+		if key not in Player.available_titles:
+			item.modulate = Color(0.4, 0.4, 0.4, 1)
+		item.title = key
+		title_box.add_child(item)
 
 
 func _on_button_pressed() -> void:
@@ -412,8 +438,7 @@ func _on_achievement_button_pressed() -> void:
 
 func _on_sleep_button_pressed() -> void:
 	Player._save_state()
-	InfoPopupManager.show_info("Game Saved")
-	AudioPlayer.play_sound(AudioPlayer.Sound.BUTTON_CLICK)
+	UI.info_notification("Game Saved")
 
 
 func _on_workshop_button_pressed() -> void:

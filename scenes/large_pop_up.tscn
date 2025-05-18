@@ -21,7 +21,6 @@ shadow_size = 10
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kupmu"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_8erbt"]
-load_path = "res://.godot/imported/namazon_menu_button.png-4e7fee51db0303cb99e5f5e7ab7d9add.ctex"
 
 [sub_resource type="Animation" id="Animation_36d8c"]
 length = 0.001

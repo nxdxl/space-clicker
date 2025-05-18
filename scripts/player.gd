@@ -2,42 +2,29 @@ extends Node
 
 const SAVE_PATH = "user://save_data.tres"
 const SaveDataScript = preload("res://scripts/save_data.gd")
+const Globals = preload("res://scripts/globals.gd")
 
-var player_name: String = "Player Name"
-var max_health: int = 10
-var health: int = 10
-var damage: int = 1
-# since you can't export Dict[type, type], gotta keep this loosely
-# supposed to be Dictionary[Globals.PlanetName, int]
-var ore_dictionary: Dictionary = {}
+var player_name: String
+var player_title: String
+var available_titles: Array[Titles.Title]
+var max_health: int
+var health: int
+var damage: int
+var ore_dictionary: Dictionary
 var item_list: Array[ItemData]
 var shop_items: Array[ItemData]
-# total enemy / ore clicks
 var total_clicks: int
 var total_time_spent: float
-var space_dollars: int = 10
+var space_dollars: int
 var total_space_dollars: int
-var session_start_time: float = 0
+var session_start_time: float
 var achievements: Array[Achievements.Achievement]
 var hidden_achievements: Array[Achievements.HiddenAchievement]
-var rank: Ranks.Rank = -1
+var rank: Ranks.Rank
 
 # these are checks for certain events in the game
-var defeated_ruru = false
-var checkpoints: Dictionary[String, bool] = {
-	"intro_one": false,
-	"intro_two": false,
-	"intro_three": false,
-	"intro_four": false,
-	"intro_five": false,
-	"intro_six": false,
-	"intro_seven": false,
-	"intro_eight": false,
-	"ice_cream": false,
-	"exotic_matter": false,
-	"anti_matter": false,
-	"sleep": false
-}
+var defeated_ruru: bool
+var checkpoints: Dictionary[String, bool]
 
 
 func _ready() -> void:
@@ -46,8 +33,43 @@ func _ready() -> void:
 	auto_save_timer.wait_time = 60  # Save every 60 seconds
 	auto_save_timer.autostart = true
 	auto_save_timer.timeout.connect(_save_state)
-	#add_child(auto_save_timer)
+	add_child(auto_save_timer)
 
+
+func instantiate_new_player() -> void:	
+	player_name = "[   ]" # default
+	player_title = ""
+	available_titles = []
+	max_health = 10
+	health = 10
+	damage = 1
+	for ore in Globals.PlanetName.values():
+		ore_dictionary[ore] = 0
+	for item in Item.get_item_list():
+		item_list.append(item)
+		shop_items.append(item)
+	total_clicks = 0
+	total_time_spent = 0
+	space_dollars = 10
+	achievements = []
+	hidden_achievements = []
+	rank = -1
+	defeated_ruru = false
+	checkpoints = {
+		"intro_one": false,
+		"intro_two": false,
+		"intro_three": false,
+		"intro_four": false,
+		"intro_five": false,
+		"intro_six": false,
+		"intro_seven": false,
+		"intro_eight": false,
+		"ice_cream": false,
+		"exotic_matter": false,
+		"anti_matter": false,
+		"sleep": false
+	}
+	_save_state()
 
 func achieve(achievement: Achievements.Achievement = Achievements.Achievement.DUMMY, hidden: Achievements.HiddenAchievement = Achievements.HiddenAchievement.DUMMY) -> void:
 	if achievement != Achievements.Achievement.DUMMY:
@@ -56,10 +78,12 @@ func achieve(achievement: Achievements.Achievement = Achievements.Achievement.DU
 		check_and_do_rank_upgrade()
 	if hidden != Achievements.HiddenAchievement.DUMMY:
 		hidden_achievements.append(hidden)
-	# would have loved to put await Dialogic.timeline_ended here,
-	# but we sometimes arrive quicker than Dialogic starts the timeline
 	UI.notify(Achievements.achievement_image, "New Achievement Unlocked", Achievements.achievement_names[achievement])
 	# play a sound maybe?
+
+
+func unlock_title(title: Titles.Title) -> void:
+	Player.available_titles.append(title)
 
 
 func has_achieved(achievement: Achievements.Achievement = Achievements.Achievement.DUMMY, hidden: Achievements.HiddenAchievement = Achievements.HiddenAchievement.DUMMY) -> bool:
@@ -72,9 +96,7 @@ func has_achieved(achievement: Achievements.Achievement = Achievements.Achieveme
 func check_and_do_rank_upgrade() -> void:
 	# i do this, so that it checks if we achieve multiple ranks at once
 	# should only happen in god mode tho
-	print_debug("Check and do rank upgrades")
 	while Ranks.check_rank_reqs(Player.rank + 1):
-		print_debug("Actually checking for ", Player.rank)
 		Player.rank += 1
 		UI.notify(Ranks.rank_images[Player.rank], "New Rank Unlocked", Ranks.rank_names[Player.rank])
 		UI.refresh_player_rank()
@@ -105,6 +127,7 @@ func _check_click_achievement():
 			if Player.total_clicks >= Achievements.req_clicks[achvmnt]:
 				Player.achieve(achvmnt)
 
+
 func _save_state() -> void:
 	# don't save in the main menu
 	if get_tree().current_scene.name == "MainMenu":
@@ -117,6 +140,7 @@ func _save_state() -> void:
 		achieve(Achievements.Achievement.HOW)
 	var save_data := SaveDataScript.new()
 	save_data.player_name = player_name
+	save_data.player_title = player_title
 	save_data.max_health = max_health
 	save_data.health = health
 	save_data.damage = damage
@@ -129,6 +153,8 @@ func _save_state() -> void:
 		save_data.achievements.append(achievement)
 	for hidden in hidden_achievements:
 		save_data.hidden_achievements.append(hidden)
+	for title in available_titles:
+		save_data.available_titles.append(title)
 	save_data.total_clicks = total_clicks
 	save_data.space_dollars = space_dollars
 	save_data.checkpoints = checkpoints
@@ -137,7 +163,7 @@ func _save_state() -> void:
 	save_data.total_time_spent = total_time_spent
 	save_data.total_space_dollars = total_space_dollars
 	save_data.rank = rank
-
+	
 	var err = ResourceSaver.save(save_data, SAVE_PATH)
 	if err == OK:
 		print("Game saved.")
@@ -153,6 +179,7 @@ func _load_state() -> int:
 	var loaded = ResourceLoader.load(SAVE_PATH) as SaveDataScript
 	if loaded:
 		player_name = loaded.player_name
+		player_title = loaded.player_title
 		max_health = loaded.max_health
 		health = loaded.health
 		damage = loaded.damage
@@ -165,6 +192,8 @@ func _load_state() -> int:
 			achievements.append(achievement)
 		for hidden in loaded.hidden_achievements:
 			hidden_achievements.append(hidden)
+		for title in loaded.available_titles:
+			available_titles.append(title)
 		total_clicks = loaded.total_clicks
 		total_time_spent = loaded.total_time_spent
 		space_dollars = loaded.space_dollars

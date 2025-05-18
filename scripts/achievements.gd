@@ -21,12 +21,13 @@ enum Achievement {
 	NEWCOMER, # spent 10 minutes in total in game
 	KNOWN, # spent 1 hour in total in game
 	HOW, # spent 10 hours in total in game
-	GODMODE,
+	GODMODE, # activate god mode for the first time
 	DUMMY,
 }
 
 
-# not implemented yet
+# hidden achievements aren't yet available in the game.
+# sorry if you tried to get them hahaha
 enum HiddenAchievement {
 	ALL_BEGINNINGS_ARE_HARD, # die in your first battle
 	HOLY_ICE_CREAM, # get a holy ice cream

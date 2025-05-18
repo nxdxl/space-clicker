@@ -189,6 +189,21 @@ corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 shadow_size = 10
 
+[sub_resource type="Animation" id="Animation_rleeb"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
 [sub_resource type="Animation" id="Animation_i5tog"]
 resource_name = "main_animationm"
 length = 0.1667
@@ -203,21 +218,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector2(0, 0), Vector2(1, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_rleeb"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(1, 1)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_wu1et"]
@@ -311,14 +311,15 @@ theme_override_styles/panel = SubResource("StyleBoxEmpty_wm3ai")
 
 [node name="NameTitleContainer" type="VBoxContainer" parent="UI/PlayerInfoBox/Info"]
 layout_mode = 1
-offset_right = 239.0
-offset_bottom = 40.0
+offset_right = 355.0
+offset_bottom = 75.0
 theme_override_constants/separation = 5
 
 [node name="Title" type="RichTextLabel" parent="UI/PlayerInfoBox/Info/NameTitleContainer"]
 unique_name_in_owner = true
 clip_contents = false
 layout_mode = 2
+size_flags_vertical = 3
 theme_override_constants/outline_size = 5
 theme_override_font_sizes/normal_font_size = 20
 text = "Fallen Angel Destroyer"
@@ -676,26 +677,44 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
+[node name="Titles" parent="UI/AchvmntRankPanel/MarginContainer/LargePopUpTabContainer" instance=ExtResource("26_0tsab")]
+visible = false
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+metadata/_tab_index = 2
+
+[node name="TitleScroller" type="ScrollContainer" parent="UI/AchvmntRankPanel/MarginContainer/LargePopUpTabContainer/Titles"]
+layout_mode = 2
+
+[node name="TitleVBox" type="VBoxContainer" parent="UI/AchvmntRankPanel/MarginContainer/LargePopUpTabContainer/Titles/TitleScroller"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
 [node name="RankCloseButton" type="Button" parent="UI/AchvmntRankPanel"]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -139.0
+offset_left = -96.0
 offset_top = 11.0
 offset_right = -11.0
-offset_bottom = 75.0
+offset_bottom = 74.0
 grow_horizontal = 0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_constants/outline_size = 15
-theme_override_font_sizes/font_size = 30
+theme_override_font_sizes/font_size = 25
 theme_override_styles/focus = ExtResource("27_i5tog")
 theme_override_styles/disabled = ExtResource("28_rleeb")
 theme_override_styles/hover_pressed = ExtResource("27_i5tog")
 theme_override_styles/hover = ExtResource("27_i5tog")
 theme_override_styles/pressed = ExtResource("27_i5tog")
 theme_override_styles/normal = ExtResource("27_i5tog")
-text = "CLOSE"
+text = "Close"
 script = ExtResource("19_rlppe")
 
 [node name="RankAnimationPlayer" type="AnimationPlayer" parent="UI/AchvmntRankPanel"]
