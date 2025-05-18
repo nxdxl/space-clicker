@@ -177,7 +177,7 @@ func open_workshop() -> void:
 
 func _prepare_workshop() -> void:
 	if workshop.get_child_count() > 4:
-		return
+		workshop.get_child(4).free()
 	var margin_container: MarginContainer = MarginContainer.new()
 	margin_container.anchor_left = 0
 	margin_container.anchor_top = 0

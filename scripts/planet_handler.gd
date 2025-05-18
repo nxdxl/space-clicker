@@ -35,9 +35,9 @@ func _ready() -> void:
 		Dialogic.start("intro_five")
 		Player.checkpoints["intro_five"] = true
 		
-	if !Player.checkpoints["ice_cream"] and planet == Globals.PlanetName.ICE_CREAM:
+	if (!Player.checkpoints["ice_cream"]) and (planet == Globals.PlanetName.ICE_CREAM):
 		Dialogic.start("furo_ice_cream")
-		Player.checkpoints["furo_ice_cream"] = true
+		Player.checkpoints["ice_cream"] = true
 
 
 func _initiate_healthbar(health_bar_bar: TextureProgressBar):

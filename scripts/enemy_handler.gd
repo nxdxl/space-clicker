@@ -80,7 +80,7 @@ func set_stats(planet_: Globals.PlanetName) -> void:
 
 
 func _spawn_ruru() -> void:
-	max_health = 100
+	max_health = 1000000
 	current_health = max_health
 	attack = Player.health * 0.1
 	space_dollars = 0

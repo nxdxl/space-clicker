@@ -25,7 +25,7 @@ var max_health_by_type: Dictionary[Globals.PlanetName, int] = {
 	Globals.PlanetName.MAGMA: 1000,
 	Globals.PlanetName.EXOTIC_MATTER: 2000,
 	Globals.PlanetName.STARDUST: 7500,
-	Globals.PlanetName.ICE_CREAM: 50000,
+	Globals.PlanetName.ICE_CREAM: 500000,
 	Globals.PlanetName.ANTIMATTER: 15000,
 }
 
