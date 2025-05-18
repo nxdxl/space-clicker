@@ -71,6 +71,7 @@ func instantiate_new_player() -> void:
 	}
 	_save_state()
 
+
 func achieve(achievement: Achievements.Achievement = Achievements.Achievement.DUMMY, hidden: Achievements.HiddenAchievement = Achievements.HiddenAchievement.DUMMY) -> void:
 	if achievement != Achievements.Achievement.DUMMY:
 		achievements.append(achievement)
@@ -79,7 +80,6 @@ func achieve(achievement: Achievements.Achievement = Achievements.Achievement.DU
 		check_and_do_rank_upgrade()
 	if hidden != Achievements.HiddenAchievement.DUMMY:
 		hidden_achievements.append(hidden)
-	# play a sound maybe?
 
 
 func unlock_title(title: Titles.Title) -> void:
