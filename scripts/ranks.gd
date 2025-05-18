@@ -39,12 +39,9 @@ var rank_names: Dictionary[Rank, String] = {
 
 func check_rank_reqs(rank: Rank) -> bool:
 	# lazy way of checking if the player is at max rank
-	print_debug("Checking rank reqs for ", rank, " Player rank ", Player.rank)
-	print_debug(Player.achievements)
 	if rank >= rank_reqs.size():
 		return false
 	for chvmnt in rank_reqs[rank]:
-		print_debug("Checking achievement ", chvmnt)
 		if chvmnt not in Player.achievements:
 			return false
 	return true

@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://04vwhaby8o6r"]
+[gd_scene load_steps=48 format=3 uid="uid://04vwhaby8o6r"]
 
 [ext_resource type="Texture2D" uid="uid://d0a11mc0hpwlf" path="res://img/characters/player/player_icon.png" id="1_nt7q6"]
 [ext_resource type="Script" uid="uid://ril6b1dx2j8h" path="res://scripts/ui_manager.gd" id="1_qsv74"]
@@ -24,6 +24,10 @@
 [ext_resource type="Texture2D" uid="uid://da2we5s2ia7pf" path="res://img/ui/bridge/namazon.png" id="22_0tsab"]
 [ext_resource type="Texture2D" uid="uid://cqe34henpurk4" path="res://img/ui/bridge/workshop.png" id="23_i5tog"]
 [ext_resource type="Texture2D" uid="uid://m3epvcgelygy" path="res://img/ui/bridge/quit.png" id="24_rleeb"]
+[ext_resource type="PackedScene" uid="uid://dlx0kecax6exi" path="res://scenes/large_pop_up_tab_container.tscn" id="25_gglip"]
+[ext_resource type="PackedScene" uid="uid://wsxiu0x5biya" path="res://scenes/tab.tscn" id="26_0tsab"]
+[ext_resource type="StyleBox" uid="uid://l7ml62qm5sdc" path="res://tres/presets/button_style.tres" id="27_i5tog"]
+[ext_resource type="StyleBox" uid="uid://vplgq7bjvkbg" path="res://tres/presets/button_disabled.tres" id="28_rleeb"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x4jx1"]
 bg_color = Color(0.654902, 0.756863, 0.952941, 1)
@@ -171,6 +175,56 @@ _data = {
 }
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kupmu"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_41akx"]
+bg_color = Color(0.654902, 0.756863, 0.952941, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+shadow_size = 10
+
+[sub_resource type="Animation" id="Animation_i5tog"]
+resource_name = "main_animationm"
+length = 0.1667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.166667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_rleeb"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wu1et"]
+_data = {
+&"RESET": SubResource("Animation_rleeb"),
+&"main_animation": SubResource("Animation_i5tog")
+}
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cof4p"]
 
@@ -421,7 +475,6 @@ theme_override_styles/pressed_mirrored = SubResource("StyleBoxFlat_x4jx1")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_x4jx1")
 theme_override_styles/normal = SubResource("StyleBoxFlat_x4jx1")
 text = "HIDE UI"
-script = ExtResource("19_rlppe")
 
 [node name="NotificationAnimation" type="AnimationPlayer" parent="UI"]
 unique_name_in_owner = true
@@ -548,14 +601,108 @@ stretch_mode = 5
 script = ExtResource("19_catpy")
 
 [node name="NamazonPanel" parent="UI" instance=ExtResource("15_f7tlh")]
-visible = true
 layout_mode = 1
 offset_top = -318.0
 offset_bottom = 480.0
 
 [node name="WorkshopPanel" parent="UI" instance=ExtResource("15_f7tlh")]
-visible = true
 layout_mode = 1
+
+[node name="AchvmntRankPanel" type="Panel" parent="UI"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -300.0
+offset_top = -320.0
+offset_right = 300.0
+offset_bottom = 480.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(300, 400)
+theme_override_styles/panel = SubResource("StyleBoxFlat_41akx")
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/AchvmntRankPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 11
+theme_override_constants/margin_top = 11
+theme_override_constants/margin_right = 11
+theme_override_constants/margin_bottom = 11
+
+[node name="LargePopUpTabContainer" parent="UI/AchvmntRankPanel/MarginContainer" instance=ExtResource("25_gglip")]
+layout_mode = 2
+current_tab = 0
+
+[node name="Achievements" parent="UI/AchvmntRankPanel/MarginContainer/LargePopUpTabContainer" instance=ExtResource("26_0tsab")]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="AchvmntScroller" type="ScrollContainer" parent="UI/AchvmntRankPanel/MarginContainer/LargePopUpTabContainer/Achievements"]
+layout_mode = 2
+
+[node name="AchvmntVBox" type="VBoxContainer" parent="UI/AchvmntRankPanel/MarginContainer/LargePopUpTabContainer/Achievements/AchvmntScroller"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Ranks" parent="UI/AchvmntRankPanel/MarginContainer/LargePopUpTabContainer" instance=ExtResource("26_0tsab")]
+visible = false
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+metadata/_tab_index = 1
+
+[node name="RankScroller" type="ScrollContainer" parent="UI/AchvmntRankPanel/MarginContainer/LargePopUpTabContainer/Ranks"]
+layout_mode = 2
+
+[node name="RankVBox" type="VBoxContainer" parent="UI/AchvmntRankPanel/MarginContainer/LargePopUpTabContainer/Ranks/RankScroller"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="RankCloseButton" type="Button" parent="UI/AchvmntRankPanel"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -139.0
+offset_top = 11.0
+offset_right = -11.0
+offset_bottom = 75.0
+grow_horizontal = 0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 15
+theme_override_font_sizes/font_size = 30
+theme_override_styles/focus = ExtResource("27_i5tog")
+theme_override_styles/disabled = ExtResource("28_rleeb")
+theme_override_styles/hover_pressed = ExtResource("27_i5tog")
+theme_override_styles/hover = ExtResource("27_i5tog")
+theme_override_styles/pressed = ExtResource("27_i5tog")
+theme_override_styles/normal = ExtResource("27_i5tog")
+text = "CLOSE"
+script = ExtResource("19_rlppe")
+
+[node name="RankAnimationPlayer" type="AnimationPlayer" parent="UI/AchvmntRankPanel"]
+unique_name_in_owner = true
+libraries = {
+&"": SubResource("AnimationLibrary_wu1et")
+}
 
 [node name="NotificationPanel" type="Panel" parent="UI"]
 unique_name_in_owner = true
@@ -600,6 +747,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_h1mc3")
 expand_mode = 1
+stretch_mode = 5
 
 [node name="Info" type="Panel" parent="UI/NotificationPanel"]
 layout_mode = 1
@@ -677,4 +825,5 @@ script = ExtResource("19_rlppe")
 [connection signal="pressed" from="UI/MenuButtonPanel/NamazonButton" to="." method="_on_namazon_button_pressed"]
 [connection signal="pressed" from="UI/MenuButtonPanel/WorkshopButton" to="." method="_on_workshop_button_pressed"]
 [connection signal="pressed" from="UI/MenuButtonPanel/QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="pressed" from="UI/AchvmntRankPanel/RankCloseButton" to="." method="_on_rank_close_button_pressed"]
 [connection signal="pressed" from="UI/ModularBackButton" to="." method="_on_modular_back_button_pressed"]

@@ -26,11 +26,17 @@ func _ready() -> void:
 		required_items = Item.item_upgrade_materials[item.item_type][item.level]
 		var index = 1
 		if _not_spoon_or_shield():
-			item_list.add_item("Space Dollars", preload("res://img/currency/coin.png"), false)
+			var ok = Player.space_dollars > Item.item_upgrade_costs[item_name][item.level]
+			item_list.add_item("x%s" % Item.item_upgrade_costs[item_name][item.level], preload("res://img/currency/coin.png"), false)
+			if ok:
+				item_list.set_item_custom_fg_color(0, Color.WHITE)
 			item_list.set_item_tooltip(0, "Space Dollars %s/%s" % [Player.space_dollars, Item.item_upgrade_costs[item_name][item.level]])
 			index = 0
 		for req_item in required_items:
-			item_list.add_item(Ores.ore_type_to_name[req_item], Ores.ore_textures[req_item], false)
+			var ok = Player.ore_dictionary[req_item] > Item.item_upgrade_materials[item_name][current_level][req_item]
+			item_list.add_item("x%s" % Item.item_upgrade_materials[item_name][current_level][req_item], Ores.ore_textures[req_item], false)
+			if ok:
+				item_list.set_item_custom_fg_color(index + 1, Color.WHITE)
 			item_list.set_item_tooltip(index + 1, "%s %s/%s" % [Ores.ore_type_to_name[req_item], Player.ore_dictionary[req_item], Item.item_upgrade_materials[item_name][current_level][req_item]])
 			index += 1
 	upgrade_button.disabled = !Item.is_upgradeable(item)

@@ -2,6 +2,7 @@ extends Node
 
 var achievement_image: Texture2D = preload("res://img/ranks/achievement.png")
 
+
 enum Achievement {
 	MEET_FURO, # meet furo for the first time
 	USELESS_UPGRADE, # get a better engine
@@ -25,6 +26,7 @@ enum Achievement {
 }
 
 
+# not implemented yet
 enum HiddenAchievement {
 	ALL_BEGINNINGS_ARE_HARD, # die in your first battle
 	HOLY_ICE_CREAM, # get a holy ice cream
@@ -43,7 +45,7 @@ var achievement_names: Dictionary[Achievement, String] = {
 	Achievement.THE_RICHEST_KID: "Richest Kid On The Block",
 	Achievement.WEALTHY: "Wealthy",
 	Achievement.HERE_COMES_THE_AIRPLANE: "Here Comes The Airplane~",
-	Achievement.ALL_GOOD_THINGS_COME_IN_THREES: "All Good Things Come In Three",
+	Achievement.ALL_GOOD_THINGS_COME_IN_THREES: "All Good Things Come In Threes",
 	Achievement.COLLECTOR: "Collector",
 	Achievement.CLICKING_IS_FUN: "Clicking Is Fun",
 	Achievement.ON_FIRE: "ON FIRE",
@@ -55,7 +57,6 @@ var achievement_names: Dictionary[Achievement, String] = {
 	Achievement.DUMMY: "Dummy Achievement",
 }
 
-
 var req_space_dollars: Dictionary[Achievement, int] = {
 	Achievement.RICH_KID: 1000,
 	Achievement.THE_RICHEST_KID: 10000,
@@ -66,4 +67,26 @@ var req_clicks: Dictionary[Achievement, int] = {
 	Achievement.CLICKING_IS_FUN: 100,
 	Achievement.ON_FIRE: 1000,
 	Achievement.MY_FINGER_IS_TIRED: 10000,
+}
+
+var achievement_descriptions: Dictionary[Achievement, String] = {
+	Achievement.MEET_FURO: "Meet Furo for the first time!",
+	Achievement.USELESS_UPGRADE: "Upgrade your engine to a Better Engine!",
+	Achievement.AN_EVEN_BETTER_ENGINE: "Upgrade your engine to an Exotic Engine!",
+	Achievement.THE_BEST_ENGINE: "Upgrade your engine to a Stardust Engine!",
+	Achievement.THE_FALLEN_ANGEL: "Defeat the Fallen Angel",
+	Achievement.RICH_KID: "Earn %s coins in total!" % req_space_dollars[Achievement.RICH_KID],
+	Achievement.THE_RICHEST_KID: "Earn %s coins in total!" % req_space_dollars[Achievement.THE_RICHEST_KID],
+	Achievement.WEALTHY: "Earn %s coins in total!" % req_space_dollars[Achievement.WEALTHY],
+	Achievement.HERE_COMES_THE_AIRPLANE: "Buy the Magma Spoon from Namazon!",
+	Achievement.ALL_GOOD_THINGS_COME_IN_THREES: "Die three times by the hand of an Anime Girl!",
+	Achievement.COLLECTOR: "Buy every item on Namazon!",
+	Achievement.CLICKING_IS_FUN: "Click %s times in total!" % req_clicks[Achievement.CLICKING_IS_FUN],
+	Achievement.ON_FIRE: "Click %s times in total!" % req_clicks[Achievement.ON_FIRE],
+	Achievement.MY_FINGER_IS_TIRED: "Click %s times in total!" % req_clicks[Achievement.MY_FINGER_IS_TIRED],
+	Achievement.NEWCOMER: "Spent 10 minutes in the Game!",
+	Achievement.KNOWN: "Spent 1 hour in the Game!",
+	Achievement.HOW: "Spent 10 hours in the Game!",
+	Achievement.GODMODE: "Press G to activate God Mode for the first time!",
+	Achievement.DUMMY: "Dummy Achievement",
 }
