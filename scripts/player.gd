@@ -1,6 +1,6 @@
 extends Node
 
-const SAVE_PATH = "user://save_data.tres"
+const SAVE_PATH = "user://space_clicker_save_data.tres"
 const SaveDataScript = preload("res://scripts/save_data.gd")
 const Globals = preload("res://scripts/globals.gd")
 
@@ -75,10 +75,10 @@ func achieve(achievement: Achievements.Achievement = Achievements.Achievement.DU
 	if achievement != Achievements.Achievement.DUMMY:
 		achievements.append(achievement)
 		# since we only go off of achievements for the ranks, this is fine
+		UI.notify(Achievements.achievement_image, "New Achievement Unlocked", Achievements.achievement_names[achievement])
 		check_and_do_rank_upgrade()
 	if hidden != Achievements.HiddenAchievement.DUMMY:
 		hidden_achievements.append(hidden)
-	UI.notify(Achievements.achievement_image, "New Achievement Unlocked", Achievements.achievement_names[achievement])
 	# play a sound maybe?
 
 

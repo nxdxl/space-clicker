@@ -22,7 +22,10 @@ func _ready():
 	
 	for ore in get_tree().get_nodes_in_group("ores"):
 		ore.connect("ore_mined", Callable(self, "_on_ore_mined"))
-
+	
+	screen_size = get_viewport_rect().size
+	var base_resolution = 1440
+	dynamic_scale = screen_size.y / base_resolution
 	var base_image_scale = 0.3 # on 1440p
 	var image_scale = base_image_scale * dynamic_scale
 	furo_image.scale = Vector2.ONE * image_scale
@@ -62,6 +65,7 @@ func _ready():
 
 
 func character_fade_in(image: TextureRect, anim: AnimationPlayer) -> void:
+	print_debug("Fading in: ", image)
 	image.visible = true
 	anim.play("fade_in")
 

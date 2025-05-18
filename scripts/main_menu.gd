@@ -1,6 +1,6 @@
 extends Control
 
-const SAVE_PATH = "user://save_data.tres"
+const SAVE_PATH = "user://space_clicker_save_data.tres"
 const SaveDataScript = preload("res://scripts/save_data.gd")
 const Globals = preload("res://scripts/globals.gd")
 
@@ -26,6 +26,7 @@ func _ready() -> void:
 	UI._hide_ui()
 	input_panel.scale = Vector2.ZERO
 	credits.visible = false
+	credits.connect("close_credits", _on_credits_close)
 	bgm.play()
 	screen_size = get_viewport_rect().size
 	if not ResourceLoader.exists(SAVE_PATH):
@@ -65,6 +66,15 @@ func _on_continue_button_pressed() -> void:
 
 func _on_credits_button_pressed() -> void:
 	credits.visible = true
+	credits.scale = Vector2.ZERO
+	credits.get_child(1).play("main_animation")
+	await credits.get_child(1).animation_finished
+
+
+func _on_credits_close() -> void:
+	credits.get_child(1).play_backwards("main_animation")
+	await credits.get_child(1).animation_finished
+	credits.visible = false
 
 
 func _on_language_pressed() -> void:
