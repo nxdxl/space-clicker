@@ -1,0 +1,33 @@
+[gd_scene load_steps=3 format=3 uid="uid://bew5ov882fat8"]
+
+[ext_resource type="Script" uid="uid://2y8dsixlxc4y" path="res://scripts/h_list_item.gd" id="1_6qak5"]
+[ext_resource type="Texture2D" uid="uid://cv7kvsti6m2nj" path="res://img/ranks/achievement.png" id="1_r4li8"]
+
+[node name="MarginContainer" type="MarginContainer"]
+offset_right = 64.0
+offset_bottom = 506.0
+size_flags_horizontal = 3
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_bottom = 5
+script = ExtResource("1_6qak5")
+
+[node name="HListItem" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="HListItemIcon" type="TextureRect" parent="HListItem"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = ExtResource("1_r4li8")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="HListItemText" type="RichTextLabel" parent="HListItem"]
+unique_name_in_owner = true
+clip_contents = false
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/outline_size = 5
+text = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+fit_content = true
+vertical_alignment = 1

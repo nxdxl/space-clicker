@@ -2,6 +2,8 @@ extends CanvasLayer
 
 const Globals = preload("res://scripts/globals.gd")
 
+var popup_open = false
+
 # --------- #
 # Player UI #
 # --------- #
@@ -69,6 +71,16 @@ var last_scene: String = ""
 @onready var namazon_button			= $%NamazonButton
 var navi_scene_path: NodePath = "res://scenes/navi.tscn"
 
+# -------------------- #
+# Achievements & Ranks #
+# -------------------- #
+@onready var achvmnt_rank_panel = $%AchvmntRankPanel
+@onready var achvmnt_box = $%AchvmntVBox
+@onready var rank_box = $%RankVBox
+@onready var rank_animation_player = $%RankAnimationPlayer
+var hlist_item = preload("res://scenes/h_list_item.tscn")
+var achvmnt_icon = preload("res://img/ranks/achievement.png")
+
 
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("god_mode"):
@@ -101,7 +113,6 @@ func ui_is_visible() -> bool:
 
 
 func _hide_ui() -> void:
-	print_debug("hiding")
 	player_info_box.visible = false
 	player_stats.visible = false
 	hide_show_ui.visible = false
@@ -140,10 +151,13 @@ func notify(image: Texture2D, upper: String, lower: String) -> void:
 func warning_notification(text: String):
 	var image = preload("res://img/ui/popup/warning_icon_red.png")
 	AudioPlayer.play_sound(AudioPlayer.Sound.UI_ERROR)
-	notify(image, "Warning!", text)
+	notify(image, "WARNING!", text)
 
 
 func open_workshop() -> void:
+	if popup_open:
+		return
+	popup_open = true
 	_prepare_workshop()
 	refresh_side_bar()
 	workshop_icon.texture = workshop_icon_texture
@@ -197,6 +211,7 @@ func _redraw_workshop_items(container: HFlowContainer):
 		Dialogic.start("intro_eight")
 		Player.checkpoints["intro_eight"] = true
 		Player.achieve(Achievements.Achievement.USELESS_UPGRADE)
+		UI.popup_open = false # i close it with this...
 
 
 func show_upgrade_popup() -> void:
@@ -204,6 +219,9 @@ func show_upgrade_popup() -> void:
 
 
 func open_namazon() -> void:
+	if popup_open:
+		return
+	popup_open = true
 	if namazon.get_child_count() != 5:
 		_add_tabs()
 		_add_namazon_items()
@@ -260,6 +278,7 @@ func _refresh_namazon_items() -> void:
 
 
 func close_popup(node: Panel) -> void:
+	popup_open = false
 	var animation = node.get_child(3)
 	animation.play_backwards("main_animation")
 	await animation.animation_finished
@@ -310,26 +329,75 @@ func refresh_side_bar() -> void:
 	side_bar.set_item_text(11, "x%s" % Player.ore_dictionary[Globals.PlanetName.ANTIMATTER])
 
 
+func _on_rank_close_button_pressed() -> void:
+	popup_open = false
+	for child in achvmnt_box.get_children():
+		child.free()
+	for child in rank_box.get_children():
+		child.free()
+	rank_animation_player.play_backwards("main_animation")
+	await rank_animation_player.animation_finished
+	achvmnt_rank_panel.visible = false
+
+
+func _open_achievement_ranks() -> void:
+	if popup_open:
+		return
+	popup_open = true
+	achvmnt_rank_panel.visible = true
+	rank_animation_player.play("main_animation")
+	_add_achievements()
+	_add_ranks()
+
+
+func _add_achievements() -> void:
+	for achvmnt in Achievements.Achievement:
+		if achvmnt == "DUMMY":
+			continue
+		var item = hlist_item.instantiate()
+		var key = Achievements.Achievement.get(achvmnt)
+		item.icon = achvmnt_icon
+		item.text = Achievements.achievement_names[key] + "\n" + Achievements.achievement_descriptions[key]
+		if key not in Player.achievements:
+			item.modulate = Color(0.4, 0.4, 0.4, 1)
+		achvmnt_box.add_child(item)
+	var item = hlist_item.instantiate()
+	item.icon = null
+	item.text = "And %s remaining hidden achievements!" % (Achievements.HiddenAchievement.size() - 1 - Player.hidden_achievements.size())
+	achvmnt_box.add_child(item)
+
+
+func _add_ranks() -> void:
+	for rank in Ranks.Rank:
+		var item = hlist_item.instantiate()
+		var key = Ranks.Rank.get(rank)
+		item.icon = Ranks.rank_images[key]
+		var req_text = "Requires: "
+		for req in Ranks.rank_reqs[key]:
+			req_text += Achievements.achievement_names[req] + ", "
+		item.text = Ranks.rank_names[key] + "\n" + req_text.substr(0, req_text.length() - 2)
+		if key > Player.rank:
+			item.modulate = Color(0.4, 0.4, 0.4, 1)
+		rank_box.add_child(item)
+
+
 func _on_button_pressed() -> void:
-	player_info_box.visible = not player_info_box.visible
-	player_stats.visible = not player_stats.visible
-	
 	var btn_size: Vector2 = hide_show_ui.size
 	
-	if not player_info_box.visible:
+	if player_info_box.visible:
+		_hide_ui()
+		hide_show_ui.visible = true
 		hide_show_ui.text = "SHOW UI"
 		hide_show_ui.pivot_offset = Vector2(btn_size.x, 0)
 		hide_show_ui.scale = Vector2.ONE * 0.5
 	else:
+		_show_ui()
 		hide_show_ui.text = "HIDE UI"
 		hide_show_ui.pivot_offset = Vector2(btn_size.x, 0)
 		hide_show_ui.scale = Vector2.ONE * 1
 
 
 func _on_modular_back_button_pressed() -> void:
-	if last_scene.contains("main_menu"):
-		print_debug("this doesn't work")
-		_hide_ui()
 	SceneSwitcher.switch_scene(last_scene)
 
 
@@ -338,7 +406,8 @@ func _on_quit_button_pressed() -> void:
 
 
 func _on_achievement_button_pressed() -> void:
-	pass # Replace with function body.
+	_open_achievement_ranks()
+	AudioPlayer.play_sound(AudioPlayer.Sound.BUTTON_CLICK)
 
 
 func _on_sleep_button_pressed() -> void:

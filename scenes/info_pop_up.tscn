@@ -1,41 +1,10 @@
-[gd_scene load_steps=15 format=3 uid="uid://cg4scer0ftj64"]
+[gd_scene load_steps=10 format=3 uid="uid://cg4scer0ftj64"]
 
 [ext_resource type="Script" uid="uid://cwexr2nvgotf0" path="res://scripts/info_pop_up.gd" id="1_coj2v"]
-[ext_resource type="Texture2D" uid="uid://dosja4vwcgjtc" path="res://img/ui/popup/pop_up_rectangle.png" id="2_coj2v"]
 [ext_resource type="Texture2D" uid="uid://dqabg7ysnupnu" path="res://img/ui/popup/warning_icon_red.png" id="3_hetl8"]
 [ext_resource type="Script" uid="uid://oj172dymblsc" path="res://scripts/button_animation.gd" id="4_tsac6"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2fdt4"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xik3c"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2fdt4"]
-bg_color = Color(0.490196, 0.533333, 0.976471, 1)
-border_width_left = 5
-border_width_top = 5
-border_width_right = 5
-border_width_bottom = 5
-border_color = Color(0, 0, 0, 1)
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
-shadow_color = Color(0, 0, 0, 0.313726)
-shadow_size = 5
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8erbt"]
-bg_color = Color(0.491466, 0.532646, 0.977889, 1)
-border_width_left = 5
-border_width_top = 5
-border_width_right = 5
-border_width_bottom = 5
-border_color = Color(0, 0, 0, 1)
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
-shadow_color = Color(0, 0, 0, 0.313726)
-shadow_size = 5
+[ext_resource type="StyleBox" uid="uid://l7ml62qm5sdc" path="res://tres/presets/button_style.tres" id="5_hetl8"]
+[ext_resource type="StyleBox" uid="uid://vplgq7bjvkbg" path="res://tres/presets/button_disabled.tres" id="6_xik3c"]
 
 [sub_resource type="Animation" id="Animation_qcw0a"]
 length = 0.001
@@ -74,42 +43,18 @@ _data = {
 &"pop_up_animation": SubResource("Animation_8erbt")
 }
 
-[sub_resource type="Animation" id="Animation_fhso0"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(1, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_p8fdt"]
-resource_name = "pop_down_animation"
-length = 0.1667
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.166667),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(1, 1), Vector2(0, 0)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_fhso0"]
-_data = {
-&"RESET": SubResource("Animation_fhso0"),
-&"pop_down_animation": SubResource("Animation_p8fdt")
-}
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_coj2v"]
+bg_color = Color(0.654902, 0.756863, 0.952941, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+shadow_size = 10
 
 [node name="InfoPopUp" type="Control"]
 layout_mode = 3
@@ -121,109 +66,89 @@ grow_vertical = 2
 pivot_offset = Vector2(960, 540)
 script = ExtResource("1_coj2v")
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="TextureRect" type="TextureRect" parent="MarginContainer"]
-custom_minimum_size = Vector2(500, 500)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-texture = ExtResource("2_coj2v")
-expand_mode = 2
-stretch_mode = 5
-
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer"]
-layout_mode = 2
-theme_override_constants/margin_left = 750
-theme_override_constants/margin_top = 340
-theme_override_constants/margin_right = 750
-theme_override_constants/margin_bottom = 340
-
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/MarginContainer"]
-layout_mode = 2
-
-[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/MarginContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 0
-theme_override_styles/panel = SubResource("StyleBoxEmpty_2fdt4")
-
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/MarginContainer/VBoxContainer/PanelContainer"]
-layout_mode = 2
-size_flags_vertical = 0
-
-[node name="PopUpIcon" type="TextureRect" parent="MarginContainer/MarginContainer/VBoxContainer/PanelContainer/HBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 0
-texture = ExtResource("3_hetl8")
-expand_mode = 3
-stretch_mode = 5
-
-[node name="PopUpTitle" type="RichTextLabel" parent="MarginContainer/MarginContainer/VBoxContainer/PanelContainer/HBoxContainer"]
-unique_name_in_owner = true
-clip_contents = false
-custom_minimum_size = Vector2(310, 0)
-layout_mode = 2
-size_flags_horizontal = 0
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 20
-theme_override_constants/shadow_outline_size = 20
-theme_override_font_sizes/bold_italics_font_size = 10
-theme_override_font_sizes/italics_font_size = 10
-theme_override_font_sizes/mono_font_size = 10
-theme_override_font_sizes/normal_font_size = 60
-theme_override_font_sizes/bold_font_size = 10
-text = "WARNING"
-fit_content = true
-autowrap_mode = 0
-
-[node name="PanelContainer2" type="PanelContainer" parent="MarginContainer/MarginContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-theme_override_styles/panel = SubResource("StyleBoxEmpty_xik3c")
-
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/MarginContainer/VBoxContainer/PanelContainer2"]
-layout_mode = 2
-theme_override_constants/margin_left = 8
-theme_override_constants/margin_bottom = 20
-
-[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/MarginContainer/VBoxContainer/PanelContainer2/MarginContainer"]
-clip_contents = false
-layout_mode = 2
-theme_override_constants/outline_size = 5
-theme_override_font_sizes/normal_font_size = 25
-text = "Click on the leave button to get back to the ship. Don't worry, you won't be attacked on the way back, since you cleared the way while coming here."
-fit_content = true
-vertical_alignment = 1
-
-[node name="Button" type="Button" parent="MarginContainer/MarginContainer/VBoxContainer"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(150, 75)
-layout_mode = 2
-size_flags_vertical = 8
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_constants/outline_size = 20
-theme_override_font_sizes/font_size = 35
-theme_override_styles/hover = SubResource("StyleBoxFlat_2fdt4")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_2fdt4")
-theme_override_styles/normal = SubResource("StyleBoxFlat_8erbt")
-text = "CLOSE"
-script = ExtResource("4_tsac6")
-
 [node name="PopUpAnimation" type="AnimationPlayer" parent="."]
 libraries = {
 &"": SubResource("AnimationLibrary_p8fdt")
 }
 
-[node name="PopDownAnimation" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_fhso0")
-}
+[node name="PopUpPanel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -150.0
+offset_right = 150.0
+offset_bottom = 150.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(150, 150)
+theme_override_styles/panel = SubResource("StyleBoxFlat_coj2v")
+script = ExtResource("1_coj2v")
 
-[connection signal="pressed" from="MarginContainer/MarginContainer/VBoxContainer/Button" to="." method="_on_button_pressed"]
+[node name="PopUpIcon" type="TextureRect" parent="PopUpPanel"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 11.0
+offset_top = 11.0
+offset_right = 75.0
+offset_bottom = 75.0
+texture = ExtResource("3_hetl8")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="PopUpTitle" type="RichTextLabel" parent="PopUpPanel"]
+unique_name_in_owner = true
+clip_contents = false
+layout_mode = 0
+offset_left = 75.0
+offset_top = 11.0
+offset_right = 289.0
+offset_bottom = 75.0
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/normal_font_size = 30
+text = "WARNING"
+vertical_alignment = 1
+
+[node name="RichTextLabel" type="RichTextLabel" parent="PopUpPanel"]
+unique_name_in_owner = true
+clip_contents = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -139.0
+offset_top = -75.0
+offset_right = 139.0
+offset_bottom = 75.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/normal_font_size = 20
+text = "THIS IS SOME DUMMY TEXT AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+vertical_alignment = 1
+
+[node name="PopUpButton" type="Button" parent="PopUpPanel"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 11.0
+offset_top = 225.0
+offset_right = 289.0
+offset_bottom = 289.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 25
+theme_override_styles/focus = ExtResource("5_hetl8")
+theme_override_styles/disabled = ExtResource("6_xik3c")
+theme_override_styles/hover_pressed = ExtResource("5_hetl8")
+theme_override_styles/hover = ExtResource("5_hetl8")
+theme_override_styles/pressed = ExtResource("5_hetl8")
+theme_override_styles/normal = ExtResource("5_hetl8")
+text = "CLOSE"
+script = ExtResource("4_tsac6")
+
+[connection signal="pressed" from="PopUpPanel/PopUpButton" to="." method="_on_button_pressed"]
